@@ -1,0 +1,40 @@
+function up() {
+  docker-compose -f ~/.config/docker-setup/docker-compose.yaml up -d
+}
+
+function down() {
+  docker-compose -f ~/.config/docker-setup/docker-compose.yaml down
+}
+
+function ctx {
+  kubectl config get-contexts
+}
+
+function pods() {
+  local original_bg_color=$(tput setab 0)  # Save original background color
+  tput setab 4  # Set background color to navy blue (ANSI color code 4)
+
+  FZF_DEFAULT_COMMAND="kubectl get pods --all-namespaces" \
+    fzf --layout=reverse \
+    --prompt "$(kubectl config current-context | sed 's/-context$//')> " \
+    --bind ctrl-/:toggle-preview \
+    --bind 'enter:execute:{ tput setab 0; kubectl exec -it --namespace {1} {2} -- bash > /dev/tty; tput setab 4; }' \
+    --bind 'ctrl-o:execute:${EDITOR:-vim} <(kubectl logs --namespace {1} {2}) > /dev/tty' \
+    --bind 'ctrl-r:reload:eval "$FZF_DEFAULT_COMMAND"'
+
+  tput setab 0  # Reset background color to original
+}
+
+
+function contexts() {
+  selected_context=$(kubectl config get-contexts -o name | fzf --layout=reverse \
+    --prompt "Select context> ")
+
+  if [ -n "$selected_context" ]; then
+    kubectl config use-context $selected_context
+  fi
+}
+
+function parse_git_branch() {
+    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p'
+}

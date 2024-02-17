@@ -1,0 +1,20 @@
+alias project="~/scripts/manage_projects.sh"
+
+alias lgb='git lgb'
+
+alias vi=nvim
+
+alias mg='rails db:migrate'
+alias mgs='rails db:migrate:status'
+alias rb='rails db:rollback'
+alias b='bundle'
+alias be='bundle exec'
+alias tpp='rails db:test:prepare'
+alias rc='rails c'
+alias rs='rails s'
+alias r='rails'
+
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
