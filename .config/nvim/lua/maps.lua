@@ -115,6 +115,9 @@ keymap.set('n', '<enter>', ':Buffers<cr>', { silent = true })
 keymap.set('n', '<leader>R', ':Ag<cr>', { silent = true })
 keymap.set('n', "<leader>\\", ':Lines<cr>', { silent = true })
 
+-- copy filepath
+vim.keymap.set('n', '<leader>cf', ':lua _G.copy_full_path()<CR>')
+
 vim.cmd([[
   function! ToggleSpec()
     let current_file = expand('%:p')
