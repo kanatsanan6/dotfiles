@@ -70,6 +70,14 @@ function rest() {
         -sound Crystal
 }
 
+function up() {
+  cd ~/.config/docker-setup && docker-compose up -d
+}
+
+function down() {
+  cd ~/.config/docker-setup && docker-compose down
+}
+
 function pr() {
   gh pr list \
     | fzf \
