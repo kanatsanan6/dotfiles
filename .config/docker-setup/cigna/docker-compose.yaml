@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  mongodb-cigna:
+    image: mongo:3.6
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=kanatsanan.j
+      - MONGO_INITDB_ROOT_PASSWORD=test1234
+    volumes:
+      - /data/db
+    command: [--auth]
+    ports:
+      - 27018:27017
+    restart: always
+
+  mongodb:
+    image: mongo:3.6
+    volumes:
+      - /data/db
+    command: --smallfiles
+    ports:
+      - 27017:27017
+    restart: always
+
+  minio:
+    image: minio/minio
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - minio_storage:/data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server --console-address ":9001" /data
+    restart: always
+
+volumes:
+  pgvol:
+  minio_storage:
