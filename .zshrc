@@ -152,3 +152,5 @@ alias datawow='cd Documents/datawowio'
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+eval "$(zoxide init --cmd cd zsh)"
