@@ -8,10 +8,10 @@ vim.cmd([[
 vim.g.mapleader = " "
 
 -- tmux
-keymap.set('n', '<M-h>', ':TmuxNavigateLeft<cr>')
-keymap.set('n', '<M-j>', ':TmuxNavigateDown<cr>')
-keymap.set('n', '<M-k>', ':TmuxNavigateUp<cr>')
-keymap.set('n', '<M-l>', ':TmuxNavigateRight<cr>')
+keymap.set('n', '<M-h>', ':TmuxNavigateLeft<cr>', { silent = true })
+keymap.set('n', '<M-j>', ':TmuxNavigateDown<cr>', { silent = true })
+keymap.set('n', '<M-k>', ':TmuxNavigateUp<cr>', { silent = true })
+keymap.set('n', '<M-l>', ':TmuxNavigateRight<cr>', { silent = true })
 
 -- page down and page up to be auto-centered
 keymap.set('n', '<C-d>', '<C-d>zz')
