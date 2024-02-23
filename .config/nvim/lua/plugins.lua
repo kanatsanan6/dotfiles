@@ -7,7 +7,6 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
-  use "bkad/CamelCaseMotion"
   use "christoomey/vim-tmux-navigator"
   use({
     "stevearc/oil.nvim",
