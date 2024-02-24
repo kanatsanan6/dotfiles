@@ -1,3 +1,7 @@
+local hs = hs
+
+hs.window.animationDuration = 0
+
 -- https://github.com/asmagill/hs._asm.undocumented.spaces
 local spaces = require "hs.spaces"
 local screen = require "hs.screen"
