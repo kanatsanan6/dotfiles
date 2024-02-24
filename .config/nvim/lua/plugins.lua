@@ -8,7 +8,6 @@ vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
   use "christoomey/vim-tmux-navigator"
-  use "epwalsh/obsidian.nvim"
   use "folke/zen-mode.nvim"
   use "ggandor/leap.nvim"
   use "gsuuon/note.nvim"
@@ -49,6 +48,7 @@ packer.startup(function(use)
   use "ThePrimeagen/vim-be-good"
   use "tpope/vim-commentary"
   use "tpope/vim-dispatch"
+  use "tpope/vim-fugitive"
   use "tpope/vim-rails"
   use "tpope/vim-repeat"
   use "tpope/vim-surround"
