@@ -115,9 +115,6 @@ keymap.set('n', '<enter>', ':Buffers<cr>', { silent = true })
 keymap.set('n', '<leader>R', ':Ag<cr>', { silent = true })
 keymap.set('n', "<leader>\\", ':Lines<cr>', { silent = true })
 
--- copy filepath
-vim.keymap.set('n', '<leader>cf', ':lua _G.copy_full_path()<CR>')
-
 vim.cmd([[
   function! ToggleSpec()
     let current_file = expand('%:p')
@@ -162,7 +159,6 @@ vim.cmd([[
   " Define the custom Vim command
   command! ToggleSpecFile :call ToggleSpec()
 
-  " Bind the command to <leader>t (assuming you've set your mapleader)
   noremap <silent> <leader>o :ToggleSpecFile<CR>
 
     " "Aliases" for commonly used commands+lazy shift finger:
@@ -193,20 +189,3 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- undotree
 vim.keymap.set('n', '<leader>d', vim.cmd.UndotreeToggle)
-
-local function open_latest_migration()
-  -- Assuming the project root is the working directory
-  local migrations_path = "db/migrate/"
-  local command = "ls -t " .. migrations_path .. " | head -n 1"
-  local handle = io.popen(command)
-  local result = handle:read("*a")
-  handle:close()
-
-  local latest_migration_file = migrations_path .. result:match("[^\n]+")
-  if latest_migration_file then
-    vim.cmd('edit ' .. latest_migration_file)
-  else
-    print("No migration files found")
-  end
-end
-vim.api.nvim_set_keymap('n', '<leader>M', ':lua open_latest_migration()<CR>', { noremap = true, silent = true })

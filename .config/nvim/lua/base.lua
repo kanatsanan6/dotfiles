@@ -6,8 +6,8 @@ vim.opt.fileencoding = 'utf-8'
 
 vim.opt.shortmess:append({ I = true })
 
-vim.opt_local.conceallevel = 2
 vim.wo.number = true
+vim.opt_local.conceallevel = 2
 vim.opt.relativenumber = true
 vim.opt.swapfile = false
 vim.opt.title = true
@@ -22,21 +22,19 @@ vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 vim.opt.inccommand = 'split'
-vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
+vim.opt.ignorecase = true
 vim.opt.smarttab = true
 vim.opt.breakindent = true
 vim.opt.shiftwidth = 2
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.tabstop = 2
-vim.opt.wrap = false         -- No Wrap lines
+vim.opt.wrap = false
 vim.opt.backspace = { 'start', 'eol', 'indent' }
-vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
+vim.opt.path:append { '**' }
 vim.opt.wildignore:append { '*/node_modules/*' }
 vim.opt.scrolloff = 12
 vim.opt.cmdheight = 1
-
--- vim.opt.guicursor = 'i:block'
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
