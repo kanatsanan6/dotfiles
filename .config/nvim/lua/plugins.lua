@@ -26,6 +26,7 @@ packer.startup(function(use)
   use "NeogitOrg/neogit"
   use "neovim/nvim-lspconfig" -- LSP
   use "ntpeters/vim-better-whitespace"
+  use "nvim-pack/nvim-spectre"
   use "nvim-lua/plenary.nvim"
   use "nvim-lualine/lualine.nvim" -- Statusline
   use {
