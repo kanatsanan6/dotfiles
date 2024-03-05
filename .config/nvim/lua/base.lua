@@ -34,7 +34,7 @@ vim.opt.backspace = { 'start', 'eol', 'indent' }
 vim.opt.path:append { '**' }
 vim.opt.wildignore:append { '*/node_modules/*' }
 vim.opt.scrolloff = 12
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 0
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])

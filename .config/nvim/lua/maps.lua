@@ -48,7 +48,7 @@ keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 keymap.set("n", "<leader>Y", [["+Y]])
 
 -- clear search hightlighted
-keymap.set("n", "<ESC>", ":noh<CR>")
+keymap.set("n", "<ESC>", ":noh<CR>", { silent = true })
 
 -- tab
 -- Tab keybinds
