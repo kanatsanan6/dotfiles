@@ -40,6 +40,16 @@ vim.opt.cmdheight = 0
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
+vim.cmd([[
+  set statusline=\%F     " Path to the file
+  set statusline+=\ %4*%m " Modified flag
+  set statusline+=%*      " Clear highlight from modified flag
+  set statusline+=%=      " Switch to the right side
+  set statusline+=%l      " current line
+  set statusline+=/%L     " Total lines
+  set statusline+=\ %c    " Column number
+]])
+
 -- Turn off paste mode when leaving insert
 vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = '*',
