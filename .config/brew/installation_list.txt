@@ -1,3 +1,8 @@
+amethyst
+font-fira-code
+ngrok
+openlens
+raycast
 aom
 autoconf
 automake

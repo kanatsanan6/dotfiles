@@ -27,6 +27,8 @@ nvim_lsp.tsserver.setup {
   cmd = { "typescript-language-server", "--stdio" }
 }
 
+nvim_lsp.tailwindcss.setup {}
+
 nvim_lsp.lua_ls.setup {
   on_attach = on_attach,
   settings = {
@@ -61,7 +63,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- See `:help vim.lsp.*` for documentation on any of the below functions
 
     local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
