@@ -13,5 +13,4 @@ npairs.add_rules({
   Rule("$$", "$$", "tex")
       :with_pair(cond.not_before_text(''))
       :with_pair(cond.not_after_text(''))
-}
-)
+})
