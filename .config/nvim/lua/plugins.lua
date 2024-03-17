@@ -59,4 +59,5 @@ packer.startup(function(use)
   use "williamboman/mason.nvim"
   use "windwp/nvim-autopairs"
   use "windwp/nvim-ts-autotag"
+  use "zk-org/zk-nvim"
 end)
