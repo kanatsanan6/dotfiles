@@ -109,51 +109,39 @@ font:
 # Should display the render timer
 debug.render_timer: false
 
-# Colors (Tomorrow Night Bright)
+# Kanagawa Dragon Alacritty Colors
 colors:
-  # Default colors
   primary:
-    background: '0x191919'
-    foreground: '0xeaeaea'
+    background: '#181616'
+    foreground: '#c5c9c5'
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text:   '0xf1c1c1'
-    cursor: '0xff2600'
-
-  # Normal colors
   normal:
-    black:   '0x000000'
-    red:     '0xff615a'
-    green:   '0xb1e969'
-    yellow:  '0xebd99c'
-    blue:    '0x7aa6da'
-    magenta: '0xe86aff'
-    cyan:    '0x82fff7'
-    white:   '0xdedacf'
+    black:   '#0d0c0c'
+    red:     '#c4746e'
+    green:   '#8a9a7b'
+    yellow:  '#c4b28a'
+    blue:    '#8ba4b0'
+    magenta: '#a292a3'
+    cyan:    '#8ea4a2'
+    white:   '#C8C093'
 
-  # Bright colors
   bright:
-    black:   '0x666666'
-    red:     '0xff3334'
-    green:   '0x9ec400'
-    yellow:  '0xe7c547'
-    blue:    '0x7aa6da'
-    magenta: '0xb77ee0'
-    cyan:    '0x54ced6'
-    white:   '0xffffff'
+    black:   '#a6a69c'
+    red:     '#E46876'
+    green:   '#87a987'
+    yellow:  '#E6C384'
+    blue:    '#7FB4CA'
+    magenta: '#938AA9'
+    cyan:    '#7AA89F'
+    white:   '#c5c9c5'
 
-  # Dim colors (Optional)
-  dim:
-￼   black:   '0x333333'
-￼   red:     '0xf2777a'
-￼   green:   '0x99cc99'
-￼   yellow:  '0xffcc66'
-￼   blue:    '0x6699cc'
-￼   magenta: '0xcc99cc'
-￼   cyan:    '0x66cccc'
-￼   white:   '0xdddddd'
+  selection:
+    background: '#2D4F67'
+    foreground: '#C8C093'
 
+  indexed_colors:
+    - { index: 16, color: '#b6927b' }
+    - { index: 17, color: '#b98d7b' }
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
