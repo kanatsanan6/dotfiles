@@ -70,3 +70,12 @@ hs.hotkey.bind({ 'command' }, '\\', function()
     end
   end
 end)
+
+function typeText(text)
+    hs.eventtap.keyStrokes(text)
+end
+
+-- Register a hotkey to trigger typing text
+hs.hotkey.bind({"cmd", "alt"}, "E", function()
+    typeText("kanasanan.j@mycloudfulfillment.com")
+end)
