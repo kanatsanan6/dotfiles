@@ -1,6 +1,6 @@
 [user]
-	email = kanatsanan.j1998@gmail.com
-	name = kanatsanan6
+	email = kanasanan.j@mycloudfulfillment.com
+	name = Kanatsanan Janpakdee
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
