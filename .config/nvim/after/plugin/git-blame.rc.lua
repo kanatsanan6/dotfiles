@@ -1,0 +1,12 @@
+require('gitblame').setup({
+    enabled = true,
+})
+
+vim.g.gitblame_message_template = '             <date> | <author> | <summary>'
+vim.g.gitblame_date_format = '%r' -- %r  relative date (e.g., 3 days ago)
+vim.g.gitblame_delay = 1000
+
+-- make git blame works with cursorline
+vim.g.gitblame_set_extmark_options = {
+  hl_mode = "combine",
+}
