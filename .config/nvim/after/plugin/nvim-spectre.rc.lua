@@ -8,6 +8,18 @@ require('spectre').setup({
     replace = {
       cmd = "sed"
     }
+  },
+  mapping = {
+    ['tab'] = {
+        map = ']',
+        cmd = "<cmd>lua require('spectre').tab()<cr>",
+        desc = 'next query'
+    },
+    ['shift-tab'] = {
+        map = '[',
+        cmd = "<cmd>lua require('spectre').tab_shift()<cr>",
+        desc = 'previous query'
+    },
   }
 })
 
