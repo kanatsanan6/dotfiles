@@ -44,6 +44,7 @@ packer.startup(function(use)
     requires = "rktjmp/lush.nvim"
   }
   use "onsails/lspkind-nvim"
+  use "petertriho/nvim-scrollbar"
   use "rebelot/kanagawa.nvim"
   use "stevearc/oil.nvim"
   use "stsewd/fzf-checkout.vim"
