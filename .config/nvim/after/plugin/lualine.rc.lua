@@ -23,9 +23,14 @@ require('lualine').setup {
     }
   },
   sections = {
-    lualine_a = {'mode'},
+    lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
+    lualine_c = {
+      {
+        'filename',
+        path = 1
+      }
+    },
     lualine_x = {
       { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }
     },
