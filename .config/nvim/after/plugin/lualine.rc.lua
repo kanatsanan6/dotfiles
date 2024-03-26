@@ -35,7 +35,7 @@ require('lualine').setup {
       { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }
     },
     lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_z = {}
   },
   inactive_sections = {
     lualine_a = {},
