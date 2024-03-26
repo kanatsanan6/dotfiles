@@ -1,5 +1,5 @@
 require('neogit').setup({
-  kind = 'vsplit',
+  kind = 'auto',
   sections = {
     stashes = {
       hidden = true

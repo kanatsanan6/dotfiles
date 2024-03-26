@@ -53,6 +53,8 @@ keymap.set("n", "<leader>Y", [["+Y]])
 -- clear search hightlighted
 keymap.set("n", "<ESC>", ":noh<CR>", { silent = true })
 
+keymap.set("n", "<leader>g", ":Neogit<CR>", { silent = true })
+
 -- tab
 -- Tab keybinds
 -- Go to tab number
@@ -93,7 +95,7 @@ keymap.set('n', 'x', '"_x')
 keymap.set('n', 'dw', 'vb"_d')
 
 -- New tab
-keymap.set('n', 'te', ':tabedit')
+keymap.set('n', 'te', ':tabedit<CR>')
 -- Split window
 keymap.set('n', 'sh', ':split<Return><C-w>w', { silent = true })
 keymap.set('n', 'ss', ':vsplit<Return><C-w>w', { silent = true })
