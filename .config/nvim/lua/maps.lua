@@ -67,8 +67,8 @@ keymap.set('n', '<Leader>8', '<CMD>tabnext8<CR>')
 keymap.set('n', '<Leader>9', '<CMD>tabnext9<CR>')
 
 -- Previous/next tab
-keymap.set('n', '<Tab>', '<CMD>tabprevious<CR>')
-keymap.set('n', '<S-Tab>', '<CMD>tabnext<CR>')
+keymap.set('n', '<S-Tab>', '<CMD>tabprevious<CR>')
+keymap.set('n', '<Tab>', '<CMD>tabnext<CR>')
 
 -- Move current tab
 keymap.set('n', '[T', '<CMD>tabmove -1<CR>')
