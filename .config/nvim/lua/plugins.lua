@@ -20,6 +20,7 @@ packer.startup(function(use)
   use "junegunn/fzf"
   use "junegunn/fzf.vim"
   use "jose-elias-alvarez/null-ls.nvim"
+  use "kdheepak/lazygit.nvim"
   use "lewis6991/gitsigns.nvim"
   use "lukas-reineke/indent-blankline.nvim"
   use "mbbill/undotree"

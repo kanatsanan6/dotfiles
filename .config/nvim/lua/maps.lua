@@ -54,7 +54,7 @@ keymap.set("n", "<leader>Y", [["+Y]])
 -- clear search hightlighted
 keymap.set("n", "<ESC>", ":noh<CR>", { silent = true })
 
-keymap.set("n", "<leader>g", ":Neogit<CR>", { silent = true })
+keymap.set("n", "<leader>g", ":LazyGit<CR>", { silent = true })
 
 -- tab
 -- Tab keybinds
