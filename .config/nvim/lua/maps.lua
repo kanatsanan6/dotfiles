@@ -28,6 +28,7 @@ keymap.set("n", "<S-k>", ":bnext<CR>", opts)
 keymap.set("n", "<S-j>", ":bprevious<CR>", opts)
 
 -- vim-test ruby on rails (rspec)
+keymap.set('n', '<leader>v', ':TestVisit<CR>')
 keymap.set('n', '<leader>t', ':TestNearest -strategy=neovim<CR>')
 keymap.set('n', '<leader>T', ':TestFile -strategy=neovim<CR>')
 keymap.set('n', '<leader>o', ':A<CR>', { silent = true })
