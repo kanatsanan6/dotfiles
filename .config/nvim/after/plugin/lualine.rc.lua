@@ -7,8 +7,8 @@ require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'seoul256',
-    component_separators = { left = '|', right = '|'},
-    section_separators = { left = '', right = ''},
+    component_separators = { left = '|', right = '|' },
+    section_separators = { left = '', right = '' },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -24,7 +24,7 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {},
-    lualine_b = {},
+    lualine_b = { 'mode' },
     lualine_c = {
       {
         'filename',
@@ -34,14 +34,14 @@ require('lualine').setup {
     lualine_x = {
       { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }
     },
-    lualine_y = {'progress'},
+    lualine_y = {},
     lualine_z = {}
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {}
   },

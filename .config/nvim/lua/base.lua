@@ -6,6 +6,7 @@ vim.opt.fileencoding = 'utf-8'
 
 vim.opt.shortmess:append({ I = true })
 
+vim.opt.showmode = false
 vim.wo.number = true
 vim.opt_local.conceallevel = 2
 vim.opt.relativenumber = true
