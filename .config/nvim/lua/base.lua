@@ -18,7 +18,6 @@ vim.opt.hlsearch = true
 vim.opt.backup = false
 vim.opt.background = 'dark'
 vim.opt.showcmd = true
-vim.opt.laststatus = 3
 vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
