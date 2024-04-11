@@ -7,6 +7,9 @@ vim.cmd([[
 
 vim.g.mapleader = " "
 
+-- filetype
+keymap.set('n', '<leader>ft', ':set filetype=ruby<CR>', { silent = true })
+
 -- tmux
 keymap.set('n', '<M-h>', ':TmuxNavigateLeft<cr>', { silent = true })
 keymap.set('n', '<M-j>', ':TmuxNavigateDown<cr>', { silent = true })

@@ -28,7 +28,7 @@ hs.hotkey.bind({ 'command' }, '\\', function()
       hs.eventtap.keyStroke('cmd', 'return', 0, alacritty)
     end
     winFrame = win:frame()
-    scrFrame = screen.mainScreen():frame()
+    scrFrame = screen.primaryScreen():frame()
     print(winFrame)
     print(scrFrame)
     winFrame.w = scrFrame.w
@@ -48,7 +48,7 @@ hs.hotkey.bind({ 'command' }, '\\', function()
   if alacritty ~= nil and alacritty:isFrontmost() then
     alacritty:hide()
   else
-    local space = spaces.activeSpaceOnScreen()
+    local space = spaces.activeSpaceOnScreen(screen.primaryScreen())
     print("activeSpace() = ", space)
     if alacritty == nil and hs.application.launchOrFocus(APP_NAME) then
       local appWatcher = nil
@@ -72,10 +72,10 @@ hs.hotkey.bind({ 'command' }, '\\', function()
 end)
 
 function typeText(text)
-    hs.eventtap.keyStrokes(text)
+  hs.eventtap.keyStrokes(text)
 end
 
 -- Register a hotkey to trigger typing text
-hs.hotkey.bind({"cmd", "alt"}, "E", function()
-    typeText("kanasanan.j@mycloudfulfillment.com")
+hs.hotkey.bind({ "cmd", "alt" }, "E", function()
+  typeText("kanasanan.j@mycloudfulfillment.com")
 end)
