@@ -4,7 +4,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 . ~/.zsh/configs
 . ~/.zsh/functions
 
-bindkey -s ^f "~/cripts/tmux-sessionizer\n"
+bindkey -s ^f "~/scripts/tmux-sessionizer\n"
 
 export ZK_NOTEBOOK_DIR='/Users/kanatsananj/notes'
 

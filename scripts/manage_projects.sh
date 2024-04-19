@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Change directory to your projects directory
-cd ~/Documents/datawowio
+cd ~/Documents/works
 
 # Use fzf to select a project
 project=$(ls -d */ ~/dotfiles | fzf --prompt="Select a project: " | sed 's/\/$//')

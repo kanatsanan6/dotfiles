@@ -9,6 +9,7 @@ vim.cmd [[packadd packer.nvim]]
 packer.startup(function(use)
   use "christoomey/vim-tmux-navigator"
   use "CopilotC-Nvim/CopilotChat.nvim"
+  use "ellisonleao/gruvbox.nvim"
   use "f-person/git-blame.nvim"
   use "folke/zen-mode.nvim"
   use "ggandor/leap.nvim"

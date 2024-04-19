@@ -120,7 +120,7 @@ keymap.set('n', '<C-w><down>', '<C-w>-')
 -- fzf
 keymap.set('n', '<C-p>', ':Files<CR>', { silent = true })
 keymap.set('n', '<leader>L', ':Lines<cr>', { silent = true })
-keymap.set('n', '<enter>', ':Buffers<cr>', { silent = true })
+-- keymap.set('n', '<enter>', ':Buffers<cr>', { silent = true })
 keymap.set('n', '<leader>R', ':Ag<cr>', { silent = true })
 keymap.set('n', "<leader>\\", ':Lines<cr>', { silent = true })
 

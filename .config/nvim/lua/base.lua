@@ -41,9 +41,7 @@ vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 vim.cmd([[
-  set statusline=\%f     " Path to the file
-  set statusline+=\ %4*%m " Modified flag
-  set statusline+=%*      " Clear highlight from modified flag
+  set statusline=\%f      " Path to the file
   set statusline+=%=      " Switch to the right side
   set statusline+=%l      " current line
   set statusline+=/%L     " Total lines
