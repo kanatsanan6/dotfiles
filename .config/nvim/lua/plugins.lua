@@ -51,6 +51,11 @@ packer.startup(function(use)
   use "rebelot/kanagawa.nvim"
   use "stevearc/oil.nvim"
   use "stsewd/fzf-checkout.vim"
+  use {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    requires = { { "nvim-lua/plenary.nvim" } }
+  }
   use "ThePrimeagen/vim-be-good"
   use "tpope/vim-commentary"
   use "tpope/vim-dispatch"
