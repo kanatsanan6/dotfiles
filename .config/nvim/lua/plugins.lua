@@ -9,11 +9,8 @@ vim.cmd [[packadd packer.nvim]]
 packer.startup(function(use)
   use "christoomey/vim-tmux-navigator"
   use "CopilotC-Nvim/CopilotChat.nvim"
-  use "ellisonleao/gruvbox.nvim"
   use "f-person/git-blame.nvim"
   use "folke/zen-mode.nvim"
-  use "ggandor/leap.nvim"
-  use "gsuuon/note.nvim"
   use "github/copilot.vim"
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-nvim-lsp"
@@ -24,7 +21,6 @@ packer.startup(function(use)
   use "kdheepak/lazygit.nvim"
   use "lewis6991/gitsigns.nvim"
   use "lukas-reineke/indent-blankline.nvim"
-  use "mbbill/undotree"
   use "mg979/vim-visual-multi"
   use "MunifTanjim/prettier.nvim"
   use "NeogitOrg/neogit"
@@ -34,29 +30,18 @@ packer.startup(function(use)
   use "nvim-lua/plenary.nvim"
   use "nvim-lualine/lualine.nvim" -- Statusline
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.5',
-    requires = { { 'nvim-lua/plenary.nvim' } }
-  }
-  use {
     "nvim-treesitter/nvim-treesitter",
     run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
-  }
-  use "Mofiqul/vscode.nvim"
-  use {
-    "mcchrish/zenbones.nvim",
-    requires = "rktjmp/lush.nvim"
   }
   use "onsails/lspkind-nvim"
   use "petertriho/nvim-scrollbar"
   use "rebelot/kanagawa.nvim"
   use "stevearc/oil.nvim"
-  use "stsewd/fzf-checkout.vim"
   use {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     requires = { { "nvim-lua/plenary.nvim" } }
   }
-  use "ThePrimeagen/vim-be-good"
   use "tpope/vim-commentary"
   use "tpope/vim-dispatch"
   use "tpope/vim-fugitive"
@@ -69,5 +54,4 @@ packer.startup(function(use)
   use "williamboman/mason.nvim"
   use "windwp/nvim-autopairs"
   use "windwp/nvim-ts-autotag"
-  use "zk-org/zk-nvim"
 end)
