@@ -62,15 +62,15 @@ keymap.set("n", "<leader>g", ":LazyGit<CR>", { silent = true })
 -- tab
 -- Tab keybinds
 -- Go to tab number
-keymap.set('n', '<Leader>1', '<CMD>tabnext1<CR>')
-keymap.set('n', '<Leader>2', '<CMD>tabnext2<CR>')
-keymap.set('n', '<Leader>3', '<CMD>tabnext3<CR>')
-keymap.set('n', '<Leader>4', '<CMD>tabnext4<CR>')
-keymap.set('n', '<Leader>5', '<CMD>tabnext5<CR>')
-keymap.set('n', '<Leader>6', '<CMD>tabnext6<CR>')
-keymap.set('n', '<Leader>7', '<CMD>tabnext7<CR>')
-keymap.set('n', '<Leader>8', '<CMD>tabnext8<CR>')
-keymap.set('n', '<Leader>9', '<CMD>tabnext9<CR>')
+-- keymap.set('n', '<Leader>1', '<CMD>tabnext1<CR>')
+-- keymap.set('n', '<Leader>2', '<CMD>tabnext2<CR>')
+-- keymap.set('n', '<Leader>3', '<CMD>tabnext3<CR>')
+-- keymap.set('n', '<Leader>4', '<CMD>tabnext4<CR>')
+-- keymap.set('n', '<Leader>5', '<CMD>tabnext5<CR>')
+-- keymap.set('n', '<Leader>6', '<CMD>tabnext6<CR>')
+-- keymap.set('n', '<Leader>7', '<CMD>tabnext7<CR>')
+-- keymap.set('n', '<Leader>8', '<CMD>tabnext8<CR>')
+-- keymap.set('n', '<Leader>9', '<CMD>tabnext9<CR>')
 
 -- Previous/next tab
 keymap.set('n', '<S-Tab>', '<CMD>tabprevious<CR>')
@@ -117,11 +117,18 @@ keymap.set('n', '<C-w><right>', '<C-w>>')
 keymap.set('n', '<C-w><up>', '<C-w>+')
 keymap.set('n', '<C-w><down>', '<C-w>-')
 
+-- custom Ag
+vim.cmd([[
+  command! -bang -nargs=* AgExcludeTest call fzf#vim#ag(<q-args>, '--ignore spec', fzf#vim#with_preview(), <bang>0)
+  command! -bang -nargs=* AgOnlyTest call fzf#vim#ag(<q-args>, '--ignore spec', fzf#vim#with_preview(), <bang>0)
+]])
+
 -- fzf
 keymap.set('n', '<C-p>', ':Files<CR>', { silent = true })
 keymap.set('n', '<leader>L', ':Lines<cr>', { silent = true })
-keymap.set('n', '<enter>', ':Buffers<cr>', { silent = true })
-keymap.set('n', '<leader>R', ':Ag<cr>', { silent = true })
+keymap.set('n', '<leader>r', ':Ag<cr>', { silent = true })
+keymap.set('n', '<leader>R', ':AgExcludeTest<cr>', { silent = true })
+keymap.set('n', '<leader>Q', ':AgOnlyTest<cr>', { silent = true })
 keymap.set('n', "<leader>\\", ':Lines<cr>', { silent = true })
 
 vim.cmd([[

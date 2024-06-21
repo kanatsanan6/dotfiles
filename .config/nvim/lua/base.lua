@@ -41,6 +41,11 @@ vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 vim.cmd([[
+  " Don't automatically continue comments after newline
+  autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+]])
+
+vim.cmd([[
   set statusline=\%f      " Path to the file
   set statusline+=%=      " Switch to the right side
   set statusline+=%l      " current line

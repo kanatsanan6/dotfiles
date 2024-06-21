@@ -8,7 +8,7 @@ ts.setup {
   },
   indent = {
     enable = true,
-    disable = {},
+    disable = { "ruby" },
   },
   ensure_installed = {
     "markdown",
@@ -22,6 +22,9 @@ ts.setup {
     "html",
     "lua",
     "ruby"
+  },
+  endwise = {
+    enable = true,
   },
   autotag = {
     enable = true,
