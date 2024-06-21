@@ -25,7 +25,7 @@ vim.cmd([[
     \ 'ctrl-s': 'split',
     \ 'ctrl-v': 'vsplit' }
   let g:fzf_layout = { 'down': '~20%' }
-  let g:fzf_preview_window = []
 
   command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+  let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 ]])

@@ -19,6 +19,11 @@ packer.startup(function(use)
   use "junegunn/fzf.vim"
   use "jose-elias-alvarez/null-ls.nvim"
   use "kdheepak/lazygit.nvim"
+  use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
+  use {
+    "kevinhwang91/nvim-ufo",
+    requires = { { "kevinhwang91/promise-async" } }
+  }
   use "lewis6991/gitsigns.nvim"
   use "lukas-reineke/indent-blankline.nvim"
   use "mg979/vim-visual-multi"
@@ -36,6 +41,7 @@ packer.startup(function(use)
   use "onsails/lspkind-nvim"
   use "petertriho/nvim-scrollbar"
   use "rebelot/kanagawa.nvim"
+  use "ronakg/quickr-preview.vim"
   use "stevearc/oil.nvim"
   use {
     "ThePrimeagen/harpoon",
