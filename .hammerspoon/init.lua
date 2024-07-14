@@ -32,16 +32,15 @@ local function moveWindowToSpace(app, space)
   win:focus()
 end
 
-local function toggleApp(appName)
+local function openApp(appName)
   local app = hs.application.get(appName)
   if app ~= nil and app:isFrontmost() then
-    app:hide()
+    -- Do nothing if the app is already frontmost
   else
     local space = spaces.activeSpaceOnScreen(screen.primaryScreen())
     if app == nil and hs.application.launchOrFocus(appName) then
       local appWatcher = hs.application.watcher.new(function(name, event, app)
         if event == hs.application.watcher.launched and name == appName then
-          app:hide()
           moveWindowToSpace(app, space)
           appWatcher:stop()
         end
@@ -54,20 +53,20 @@ local function toggleApp(appName)
   end
 end
 
-
 -- email shortcut
 hs.hotkey.bind({ "cmd", "alt" }, "E", function()
   hs.eventtap.keyStrokes("kanasanan.j@mycloudfulfillment.com")
 end)
 
 hs.hotkey.bind({ 'cmd', 'shift' }, '1', function()
-  toggleApp('Google Chrome')
+  openApp('Google Chrome')
 end)
 
 hs.hotkey.bind({ 'cmd', 'shift' }, '2', function()
-  toggleApp('Alacritty')
+  openApp('Alacritty')
 end)
 
 hs.hotkey.bind({ 'cmd', 'shift' }, '3', function()
-  toggleApp('Slack')
+  openApp('Slack')
 end)
+
