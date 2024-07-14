@@ -1,9 +1,6 @@
-alias project="~/scripts/manage_projects.sh"
-
-alias lgb='git lgb'
-
 alias vi=nvim
 
+# Rails
 alias mg='rails db:migrate'
 alias mgs='rails db:migrate:status'
 alias rb='rails db:rollback'
@@ -14,7 +11,9 @@ alias rc='rails c'
 alias rs='rails s'
 alias r='rails'
 
+# Git
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias lgb='git lgb'
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
