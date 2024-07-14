@@ -1,9 +1,0 @@
-#!/bin/bash
-
-current_branch=$(git rev-parse --abbrev-ref HEAD)
-pattern='MCV3-[0-9]{4}'
-
-if [[ $current_branch =~ $pattern ]]; then
-    ticket=${BASH_REMATCH[0]}
-    open "https://mcf-team.atlassian.net/browse/$ticket"
-fi
