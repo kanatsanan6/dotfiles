@@ -8,10 +8,8 @@ vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
   use "christoomey/vim-tmux-navigator"
-  use "CopilotC-Nvim/CopilotChat.nvim"
   use "dyng/ctrlsf.vim"
   use "f-person/git-blame.nvim"
-  use "folke/zen-mode.nvim"
   use "github/copilot.vim"
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-nvim-lsp"
@@ -34,7 +32,6 @@ packer.startup(function(use)
   use "ntpeters/vim-better-whitespace"
   use "nvim-pack/nvim-spectre"
   use "nvim-lua/plenary.nvim"
-  use "nvim-lualine/lualine.nvim" -- Statusline
   use {
     "nvim-treesitter/nvim-treesitter",
     run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
