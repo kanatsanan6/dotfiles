@@ -121,6 +121,7 @@ keymap.set('n', '<C-w><down>', '<C-w>-')
 vim.cmd([[
   command! -bang -nargs=* AgExcludeTest call fzf#vim#ag(<q-args>, '--ignore spec', fzf#vim#with_preview(), <bang>0)
   command! -bang -nargs=* AgOnlyTest call fzf#vim#ag(<q-args>, '--ignore spec', fzf#vim#with_preview(), <bang>0)
+  command! -bang -nargs=* Files call fzf#vim#files(<q-args>, {'options': ['-i']}, <bang>0)
 ]])
 
 -- fzf
