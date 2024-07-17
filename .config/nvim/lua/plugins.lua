@@ -13,7 +13,7 @@ packer.startup(function(use)
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/nvim-cmp"
-  use "junegunn/fzf"
+  use { "junegunn/fzf", tag = "0.52.0" }
   use "junegunn/fzf.vim"
   use "jose-elias-alvarez/null-ls.nvim"
   use "kdheepak/lazygit.nvim"
