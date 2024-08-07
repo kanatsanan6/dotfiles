@@ -7,6 +7,7 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
+  use "Alligator/accent.vim"
   use "christoomey/vim-tmux-navigator"
   use "dyng/ctrlsf.vim"
   use "f-person/git-blame.nvim"
@@ -39,6 +40,10 @@ packer.startup(function(use)
   use "petertriho/nvim-scrollbar"
   use "rebelot/kanagawa.nvim"
   use "ronakg/quickr-preview.vim"
+  use {
+    'ruifm/gitlinker.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+  }
   use "stevearc/oil.nvim"
   use {
     "ThePrimeagen/harpoon",

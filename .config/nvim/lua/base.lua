@@ -46,11 +46,11 @@ vim.cmd([[
 ]])
 
 vim.cmd([[
-  set statusline=\%f      " Path to the file
-  set statusline+=%=      " Switch to the right side
-  set statusline+=%l      " current line
-  set statusline+=/%L     " Total lines
-  set statusline+=\ %c    " Column number
+  set statusline=%{expand('%:~:.')}  " Relative path to the file
+  set statusline+=%=                 " Switch to the right side
+  set statusline+=%l                 " Current line
+  set statusline+=/%L                " Total lines
+  set statusline+=\ %c               " Column number
 ]])
 
 -- Turn off paste mode when leaving insert
