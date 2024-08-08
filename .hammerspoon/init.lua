@@ -49,6 +49,10 @@ function openUrl(url)
   ]])
 end
 
+hs.hotkey.bind({ "cmd", "alt" }, "E", function()
+  hs.eventtap.keyStrokes("kanasanan.j@mycloudfulfillment.com")
+end)
+
 hs.hotkey.bind(modifiers, 'j', function() openUrl(env.jira_url) end)
 hs.hotkey.bind(modifiers, 'g', function() openUrl(env.pr_url) end)
 hs.hotkey.bind(modifiers, 'i', function() openUrl(env.inbox_url) end)
