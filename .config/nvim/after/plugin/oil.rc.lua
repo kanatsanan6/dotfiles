@@ -4,6 +4,15 @@ require("oil").setup({
   view_options = {
     -- Show files and directories that start with "."
     show_hidden = true,
+    is_always_hidden = function(name, bufnr)
+      local always_hidden = { ".git", ".vscode", ".idea" }
+
+      for _, value in pairs(always_hidden) do
+        if value == name then return true end
+      end
+
+      return false
+    end,
   },
   keymaps = {
     ["g?"] = "actions.show_help",

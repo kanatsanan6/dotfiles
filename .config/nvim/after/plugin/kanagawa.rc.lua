@@ -1,6 +1,7 @@
 require('kanagawa').setup({
-  background = {    -- map the value of 'background' option to a theme
-    dark = "black", -- try "dragon" !
-    light = "lotus"
+  background = {
+    dark = "black",
+    light = "lotus",
+    transparent = true, -- do not set background color
   },
 })
