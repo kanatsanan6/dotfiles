@@ -2,6 +2,10 @@ local status, ts = pcall(require, "nvim-treesitter.configs")
 if (not status) then return end
 
 ts.setup {
+  diagnostics = { disable = { 'missing-fields' } },
+  sync_install = false,
+  auto_install = true,
+  ignore_install = {},
   highlight = {
     enable = true,
     disable = {},
@@ -32,7 +36,7 @@ ts.setup {
   context_commentstring = {
     enable         = true,
     enable_autocmd = false,
-  }
+  },
 }
 
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()

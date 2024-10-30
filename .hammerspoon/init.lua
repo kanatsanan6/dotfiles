@@ -16,8 +16,8 @@ end
 
 hs.hotkey.bind(modifiers, '1', function() open('Google Chrome') end)
 hs.hotkey.bind(modifiers, '2', function() open('Alacritty') end)
-hs.hotkey.bind(modifiers, '3', function() open('Slack') end)
-hs.hotkey.bind(modifiers, '4', function() open('Finder') end)
+hs.hotkey.bind(modifiers, '3', function() open('Alacritty') end)
+hs.hotkey.bind(modifiers, '4', function() open('Slack') end)
 
 function openUrl(url)
   return hs.osascript.javascript([[

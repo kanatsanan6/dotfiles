@@ -26,10 +26,6 @@ keymap.set('x', 'y', 'mcy`c')
 -- Easier % to jump between matching brackets
 keymap.set('n', '<C-b>', '%')
 
--- buffer navigation
-keymap.set("n", "<S-k>", ":bnext<CR>", opts)
-keymap.set("n", "<S-j>", ":bprevious<CR>", opts)
-
 -- vim-test ruby on rails (rspec)
 keymap.set('n', '<leader>v', ':TestVisit<CR>')
 keymap.set('n', '<leader>t', ':TestNearest<CR>')

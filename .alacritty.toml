@@ -13,7 +13,7 @@ shape = "Block"
 TERM = "xterm-256color"
 
 [font]
-size = 13
+size = 15
 
 [font.bold]
 family = "JetBrains Mono"

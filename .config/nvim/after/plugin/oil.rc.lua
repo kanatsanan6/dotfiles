@@ -4,7 +4,7 @@ require("oil").setup({
   view_options = {
     -- Show files and directories that start with "."
     show_hidden = true,
-    is_always_hidden = function(name, bufnr)
+    is_always_hidden = function(name, _)
       local always_hidden = { ".git", ".vscode", ".idea" }
 
       for _, value in pairs(always_hidden) do

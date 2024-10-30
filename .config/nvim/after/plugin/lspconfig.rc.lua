@@ -1,9 +1,7 @@
-local status, nvim_lsp = pcall(require, 'lspconfig')
+local status, _ = pcall(require, 'lspconfig')
 if (not status) then return end
 
-local protocol = require('vim.lsp.protocol')
-
-local on_attach = function(client, bufnr)
+local on_attach = function(client, _)
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_command [[augroup Format]]
     vim.api.nvim_command [[autocmd! * <buffer>]]
@@ -42,12 +40,6 @@ local lsp_on_attach = function()
   opt_local.formatexpr = ""
 end
 
--- Global mappings.
-map("n", "'r", ":LspRestart<CR>", { silent = true })
-
--- Add border to LSP windows such as `:LspInfo`.
-nvim_lsp_windows.default_options.border = "single"
-
 -- Custom on attach function which disables formatting where ALE will instead
 -- be used to format.
 local lsp_on_attach_no_formatting = function(client)
@@ -57,27 +49,33 @@ local lsp_on_attach_no_formatting = function(client)
   lsp_on_attach()
 end
 
--- Custom on attach function which disable LSP semantic highlighting.
--- local lsp_on_attach_no_semantic_highlights = function(client)
---   client.server_capabilities.semanticTokensProvider = nil
--- end
+-- Global mappings.
+map("n", "'r", ":LspRestart<CR>", { silent = true })
+
+-- Add border to LSP windows such as `:LspInfo`.
+nvim_lsp_windows.default_options.border = "single"
 
 -- gem install solargraph
 -- solargraph clear
 -- solargraph download-core
 -- solargraph bundle
 nvim_lsp.solargraph.setup({
-  on_attach = lsp_on_attach_no_formatting, -- Use standardrb for formatting
+  on_attach = lsp_on_attach_no_formatting,
   capabilities = capabilities,
   flags = { debounce_text_changes = 300 },
   single_file_support = true, -- Allow LSP to work in standalone Ruby scripts
   settings = { solargraph = { diagnostics = false } },
 })
 
--- gem install standard
-nvim_lsp.standardrb.setup({
-  capabilities = capabilities,
-  flags = { debounce_text_changes = 300 },
+vim.opt.signcolumn = "yes"
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "ruby",
+  callback = function()
+    vim.lsp.start {
+      name = "rubocop",
+      cmd = { "bundle", "exec", "rubocop", "--lsp" },
+    }
+  end,
 })
 
 nvim_lsp.gopls.setup {
