@@ -199,6 +199,3 @@ vim.cmd([[
 ]])
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
--- undotree
-vim.keymap.set('n', '<leader>d', vim.cmd.UndotreeToggle)

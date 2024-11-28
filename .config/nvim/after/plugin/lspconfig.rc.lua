@@ -55,6 +55,14 @@ map("n", "'r", ":LspRestart<CR>", { silent = true })
 -- Add border to LSP windows such as `:LspInfo`.
 nvim_lsp_windows.default_options.border = "single"
 
+nvim_lsp.rubocop.setup({
+  on_attach = lsp_on_attach_no_formatting,
+  capabilities = capabilities,
+  flags = { debounce_text_changes = 300 },
+  single_file_support = true, -- Allow LSP to work in standalone Ruby scripts
+  settings = { solargraph = { diagnostics = false } },
+})
+
 -- gem install solargraph
 -- solargraph clear
 -- solargraph download-core

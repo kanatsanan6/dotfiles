@@ -44,6 +44,7 @@ packer.startup(function(use)
     'ruifm/gitlinker.nvim',
     requires = 'nvim-lua/plenary.nvim',
   }
+  use "samharju/serene.nvim"
   use "stevearc/oil.nvim"
   use {
     "ThePrimeagen/harpoon",

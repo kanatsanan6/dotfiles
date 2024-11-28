@@ -19,7 +19,7 @@ hs.hotkey.bind(modifiers, '2', function() open('Alacritty') end)
 hs.hotkey.bind(modifiers, '3', function() open('Alacritty') end)
 hs.hotkey.bind(modifiers, '4', function() open('Slack') end)
 
-function openUrl(url)
+function OpenUrl(url)
   return hs.osascript.javascript([[
     var gg = Application('Google Chrome');
     gg.activate();
@@ -53,7 +53,7 @@ hs.hotkey.bind({ "cmd", "alt" }, "E", function()
   hs.eventtap.keyStrokes("kanasanan.j@mycloudfulfillment.com")
 end)
 
-hs.hotkey.bind(modifiers, 'j', function() openUrl(env.jira_url) end)
-hs.hotkey.bind(modifiers, 'g', function() openUrl(env.pr_url) end)
-hs.hotkey.bind(modifiers, 'i', function() openUrl(env.inbox_url) end)
-hs.hotkey.bind(modifiers, 'c', function() openUrl(env.calendar_url) end)
+hs.hotkey.bind(modifiers, 'j', function() OpenUrl(env.jira_url) end)
+hs.hotkey.bind(modifiers, 'g', function() OpenUrl(env.pr_url) end)
+hs.hotkey.bind(modifiers, 'i', function() OpenUrl(env.inbox_url) end)
+hs.hotkey.bind(modifiers, 'c', function() OpenUrl(env.calendar_url) end)

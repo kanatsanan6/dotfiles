@@ -12,4 +12,4 @@ vim.cmd [[
   augroup END
 ]]
 
-vim.cmd.colorscheme("kanagawa-dragon")
+vim.cmd.colorscheme("serene")

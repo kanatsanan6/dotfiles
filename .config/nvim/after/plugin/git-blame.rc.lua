@@ -5,8 +5,7 @@ git_blame.setup({
 })
 
 vim.g.gitblame_message_template = '<date> | <author> | <summary>'
-vim.g.gitblame_date_format = '%r' -- %r  relative date (e.g., 3 days ago)
-vim.g.gitblame_delay = 1000
+vim.g.gitblame_date_format = '%r'
 
 vim.keymap.set('n', '<leader>b', ':GitBlameToggle<CR>', { silent = true })
 
@@ -14,3 +13,5 @@ vim.keymap.set('n', '<leader>b', ':GitBlameToggle<CR>', { silent = true })
 vim.g.gitblame_set_extmark_options = {
   hl_mode = "combine",
 }
+
+vim.g.gitblame_use_blame_commit_file_urls = true
