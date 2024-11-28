@@ -11,21 +11,26 @@ require('spectre').setup({
   },
   mapping = {
     ['tab'] = {
-        map = ']',
-        cmd = "<cmd>lua require('spectre').tab()<cr>",
-        desc = 'next query'
+      map = ']',
+      cmd = "<cmd>lua require('spectre').tab()<cr>",
+      desc = 'next query'
     },
     ['shift-tab'] = {
-        map = '[',
-        cmd = "<cmd>lua require('spectre').tab_shift()<cr>",
-        desc = 'previous query'
+      map = '[',
+      cmd = "<cmd>lua require('spectre').tab_shift()<cr>",
+      desc = 'previous query'
     },
   }
 })
 
-vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
-  desc = "Toggle Spectre"
-})
+-- vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+--   desc = "Toggle Spectre"
+-- })
+
+vim.keymap.set('n', '<leader>S', function()
+  vim.cmd('tabnew')
+  require('spectre').toggle()
+end, { desc = "Open new tab and toggle Spectre" })
 
 vim.keymap.set('n', '<leader>sf', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
   desc = "Search on current file"
