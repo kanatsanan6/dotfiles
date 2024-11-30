@@ -21,6 +21,7 @@ export PATH=$PATH:$GOROOT/bin
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:/Users/kanatsananj/.asdf/shims/standardrb"
 export PATH=/bin:/usr/bin:/usr/local/bin:${PATH}
+export NODE_OPTIONS="--openssl-legacy-provider"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
