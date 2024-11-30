@@ -36,15 +36,11 @@ vim.opt.wildignore:append { '*/node_modules/*' }
 vim.opt.scrolloff = 12
 vim.opt.cmdheight = 1
 vim.opt.signcolumn = 'yes'
+vim.opt.formatoptions:append { 'r' }
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
-
-vim.cmd([[
-  " Don't automatically continue comments after newline
-  autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-]])
 
 vim.cmd([[
   set statusline=%{expand('%:~:.')}  " Relative path to the file
@@ -59,10 +55,6 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = '*',
   command = "set nopaste"
 })
-
--- Add asterisks in block comments
-vim.opt.formatoptions:append { 'r' }
-vim.api.nvim_command('hi LineNr guibg=bg')
 
 -- Define a function for Go settings
 local function go_settings()

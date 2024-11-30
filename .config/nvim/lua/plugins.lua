@@ -7,18 +7,14 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
-  use "Alligator/accent.vim"
   use "christoomey/vim-tmux-navigator"
-  use "dyng/ctrlsf.vim"
   use "f-person/git-blame.nvim"
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/nvim-cmp"
-  use { "junegunn/fzf", tag = "0.52.0" }
+  use "junegunn/fzf"
   use "junegunn/fzf.vim"
   use "jose-elias-alvarez/null-ls.nvim"
-  use "kdheepak/lazygit.nvim"
-  use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
   use {
     "kevinhwang91/nvim-ufo",
     requires = { { "kevinhwang91/promise-async" } }
@@ -38,8 +34,6 @@ packer.startup(function(use)
   }
   use "onsails/lspkind-nvim"
   use "petertriho/nvim-scrollbar"
-  use "rebelot/kanagawa.nvim"
-  use "ronakg/quickr-preview.vim"
   use {
     'ruifm/gitlinker.nvim',
     requires = 'nvim-lua/plenary.nvim',

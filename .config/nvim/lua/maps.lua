@@ -1,5 +1,4 @@
 local keymap = vim.keymap
-local opts = { silent = true }
 
 vim.cmd([[
   let g:fzf_checkout_git_options = '--sort=-committerdate'
@@ -52,21 +51,6 @@ keymap.set("n", "<leader>Y", [["+Y]])
 
 -- clear search hightlighted
 keymap.set("n", "<ESC>", ":noh<CR>", { silent = true })
-
-keymap.set("n", "<leader>g", ":LazyGit<CR>", { silent = true })
-
--- tab
--- Tab keybinds
--- Go to tab number
--- keymap.set('n', '<Leader>1', '<CMD>tabnext1<CR>')
--- keymap.set('n', '<Leader>2', '<CMD>tabnext2<CR>')
--- keymap.set('n', '<Leader>3', '<CMD>tabnext3<CR>')
--- keymap.set('n', '<Leader>4', '<CMD>tabnext4<CR>')
--- keymap.set('n', '<Leader>5', '<CMD>tabnext5<CR>')
--- keymap.set('n', '<Leader>6', '<CMD>tabnext6<CR>')
--- keymap.set('n', '<Leader>7', '<CMD>tabnext7<CR>')
--- keymap.set('n', '<Leader>8', '<CMD>tabnext8<CR>')
--- keymap.set('n', '<Leader>9', '<CMD>tabnext9<CR>')
 
 -- Previous/next tab
 keymap.set('n', '<S-Tab>', '<CMD>tabprevious<CR>')
@@ -133,20 +117,15 @@ vim.cmd([[
     let current_file = expand('%:p')
     let destination_file = ""
 
-    " Check if current file is a spec
     if current_file =~ "_spec\.rb$"
-      " Convert spec path to main file path
       let destination_file = substitute(current_file, "/spec/", "/app/", "")
       let destination_file = substitute(destination_file, "_spec\.rb$", ".rb", "")
     else
-      " Convert main file path to spec path
       let destination_file = substitute(current_file, "/app/", "/spec/", "")
       let destination_file = substitute(destination_file, "\.rb$", "_spec.rb", "")
     endif
 
-    " Check if the destination file exists
     if filereadable(destination_file)
-      " If more than one window is open, switch to the other split and edit. Otherwise, do a vertical split.
       if winnr('$') > 1
         wincmd w
         execute "edit " . destination_file
@@ -154,7 +133,6 @@ vim.cmd([[
         execute "vsplit " . destination_file
       endif
     else
-      " Offer to create it if it doesn't exist
       let answer = input("File does not exist. Create it? (y/n) ")
       if answer == 'y'
         execute "!touch " . destination_file
