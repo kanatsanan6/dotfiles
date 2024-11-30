@@ -1,4 +1,6 @@
 local keymap = vim.keymap
+local func = require('function')
+local opts = { silent = true }
 
 vim.cmd([[
   let g:fzf_checkout_git_options = '--sort=-committerdate'
@@ -6,14 +8,11 @@ vim.cmd([[
 
 vim.g.mapleader = " "
 
--- filetype
-keymap.set('n', '<leader>ft', ':set filetype=ruby<CR>', { silent = true })
-
 -- tmux
-keymap.set('n', '<M-h>', ':TmuxNavigateLeft<cr>', { silent = true })
-keymap.set('n', '<M-j>', ':TmuxNavigateDown<cr>', { silent = true })
-keymap.set('n', '<M-k>', ':TmuxNavigateUp<cr>', { silent = true })
-keymap.set('n', '<M-l>', ':TmuxNavigateRight<cr>', { silent = true })
+keymap.set('n', '<M-h>', ':TmuxNavigateLeft<cr>', opts)
+keymap.set('n', '<M-j>', ':TmuxNavigateDown<cr>', opts)
+keymap.set('n', '<M-k>', ':TmuxNavigateUp<cr>', opts)
+keymap.set('n', '<M-l>', ':TmuxNavigateRight<cr>', opts)
 
 -- page down and page up to be auto-centered
 keymap.set('n', '<C-d>', '<C-d>zz')
@@ -29,10 +28,7 @@ keymap.set('n', '<C-b>', '%')
 keymap.set('n', '<leader>v', ':TestVisit<CR>')
 keymap.set('n', '<leader>t', ':TestNearest<CR>')
 keymap.set('n', '<leader>T', ':TestFile<CR>')
-keymap.set('n', '<leader>o', ':A<CR>', { silent = true })
-
--- Open notes
-keymap.set('n', '<leader>n', '<C-w>v:e ~/notes<CR>')
+keymap.set('n', '<leader>o', func.toggleSpec, opts)
 
 -- quick fix navigation
 keymap.set('n', '<M-n>', ':cn<CR>')
@@ -50,7 +46,7 @@ keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 keymap.set("n", "<leader>Y", [["+Y]])
 
 -- clear search hightlighted
-keymap.set("n", "<ESC>", ":noh<CR>", { silent = true })
+keymap.set("n", "<ESC>", ":noh<CR>", opts)
 
 -- Previous/next tab
 keymap.set('n', '<S-Tab>', '<CMD>tabprevious<CR>')
@@ -69,8 +65,8 @@ keymap.set('v', '>', '>gv^')
 keymap.set('v', '<', '<gv^')
 
 -- Make J and K move selected lines up and down
-keymap.set('v', '<M-j>', [[:move '>+1<CR>gv=gv]], { silent = true })
-keymap.set('v', '<M-k>', [[:move '<-2<CR>gv=gv]], { silent = true })
+keymap.set('v', '<M-j>', [[:move '>+1<CR>gv=gv]], opts)
+keymap.set('v', '<M-k>', [[:move '<-2<CR>gv=gv]], opts)
 
 -- Do not yank with x
 keymap.set('n', 'x', '"_x')
@@ -81,8 +77,8 @@ keymap.set('n', 'dw', 'vb"_d')
 -- New tab
 keymap.set('n', 'te', ':tabedit<CR>')
 -- Split window
-keymap.set('n', 'sh', ':split<Return><C-w>w', { silent = true })
-keymap.set('n', 'ss', ':vsplit<Return><C-w>w', { silent = true })
+keymap.set('n', 'sh', ':split<Return><C-w>w', opts)
+keymap.set('n', 'ss', ':vsplit<Return><C-w>w', opts)
 
 -- Move window
 keymap.set('n', '\\', '<C-w>w')
@@ -105,54 +101,17 @@ vim.cmd([[
 ]])
 
 -- fzf
-keymap.set('n', '<C-p>', ':Files<CR>', { silent = true })
-keymap.set('n', '<leader>L', ':Lines<cr>', { silent = true })
-keymap.set('n', '<leader>r', ':Ag<cr>', { silent = true })
-keymap.set('n', '<leader>R', ':AgExcludeTest<cr>', { silent = true })
-keymap.set('n', '<leader>Q', ':AgOnlyTest<cr>', { silent = true })
-keymap.set('n', "<leader>\\", ':Lines<cr>', { silent = true })
+keymap.set('n', '<C-p>', ':Files<CR>', opts)
+keymap.set('n', '<leader>L', ':Lines<cr>', opts)
+keymap.set('n', '<leader>r', ':Ag<cr>', opts)
+keymap.set('n', '<leader>R', ':AgExcludeTest<cr>', opts)
+keymap.set('n', '<leader>Q', ':AgOnlyTest<cr>', opts)
+keymap.set('n', "<leader>\\", ':Lines<cr>', opts)
+
+-- Oil
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 vim.cmd([[
-  function! ToggleSpec()
-    let current_file = expand('%:p')
-    let destination_file = ""
-
-    if current_file =~ "_spec\.rb$"
-      let destination_file = substitute(current_file, "/spec/", "/app/", "")
-      let destination_file = substitute(destination_file, "_spec\.rb$", ".rb", "")
-    else
-      let destination_file = substitute(current_file, "/app/", "/spec/", "")
-      let destination_file = substitute(destination_file, "\.rb$", "_spec.rb", "")
-    endif
-
-    if filereadable(destination_file)
-      if winnr('$') > 1
-        wincmd w
-        execute "edit " . destination_file
-      else
-        execute "vsplit " . destination_file
-      endif
-    else
-      let answer = input("File does not exist. Create it? (y/n) ")
-      if answer == 'y'
-        execute "!touch " . destination_file
-        " Again, decide how to open based on window count
-        if winnr('$') > 1
-          wincmd w
-          execute "edit " . destination_file
-        else
-          execute "vsplit " . destination_file
-        endif
-      endif
-    endif
-  endfunction
-
-  " Define the custom Vim command
-  command! ToggleSpecFile :call ToggleSpec()
-
-  noremap <silent> <leader>o :ToggleSpecFile<CR>
-
-    " "Aliases" for commonly used commands+lazy shift finger:
   command! -bar -nargs=* -complete=file -range=% -bang W         <line1>,<line2>write<bang> <args>
   command! -bar -nargs=* -complete=file -range=% -bang Write     <line1>,<line2>write<bang> <args>
   command! -bar -nargs=* -complete=file -range=% -bang Wq        <line1>,<line2>wq<bang> <args>
@@ -175,5 +134,3 @@ vim.cmd([[
   command! -bar                                        Messages  messages
   command! -bar -nargs=+ -complete=file          -bang Source    source<bang> <args>
 ]])
-
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
