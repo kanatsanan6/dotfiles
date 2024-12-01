@@ -1,3 +1,6 @@
 require('neogit').setup({
-  kind = "floating"
+  disable_hint = true,
+  disable_line_numbers = false,
+  graph_style = "unicode",
+  kind = "floating",
 })
