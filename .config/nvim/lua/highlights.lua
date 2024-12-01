@@ -12,4 +12,4 @@ vim.cmd [[
   augroup END
 ]]
 
-vim.cmd.colorscheme("serene")
+vim.cmd.colorscheme("gruvbox")
