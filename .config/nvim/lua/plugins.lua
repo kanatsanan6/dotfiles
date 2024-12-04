@@ -7,8 +7,9 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
+  use "chentoast/marks.nvim"
   use "christoomey/vim-tmux-navigator"
-  use { "ellisonleao/gruvbox.nvim" }
+  use "ellisonleao/gruvbox.nvim"
   use "f-person/git-blame.nvim"
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-nvim-lsp"
