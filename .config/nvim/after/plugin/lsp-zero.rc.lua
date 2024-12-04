@@ -11,8 +11,12 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
 )
 
 vim.diagnostic.config({
-  signs = false,
+  virtual_text = false
 })
+
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
@@ -70,7 +74,7 @@ cmp.setup({
 
 -- Setup language server
 ---- Ruby
-lspconfig.rubocop.setup({})
+lspconfig.solargraph.setup({})
 
 ---- Lua
 lspconfig.lua_ls.setup({
@@ -85,5 +89,10 @@ lspconfig.lua_ls.setup({
 
 ---- Go
 lspconfig.gopls.setup({
+  on_attach = on_attach,
+})
+
+---- Json
+lspconfig.jsonls.setup({
   on_attach = on_attach,
 })
