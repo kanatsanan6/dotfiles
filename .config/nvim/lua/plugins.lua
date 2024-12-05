@@ -18,6 +18,12 @@ packer.startup(function(use)
   use "junegunn/fzf"
   use "junegunn/fzf.vim"
   use "jose-elias-alvarez/null-ls.nvim"
+  use{
+    "kdheepak/lazygit.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  }
   use {
     "kevinhwang91/nvim-ufo",
     requires = { { "kevinhwang91/promise-async" } }
