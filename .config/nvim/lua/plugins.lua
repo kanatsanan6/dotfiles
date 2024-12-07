@@ -43,6 +43,7 @@ packer.startup(function(use)
   }
   use "onsails/lspkind-nvim"
   use "petertriho/nvim-scrollbar"
+  use "rebelot/kanagawa.nvim"
   use {
     'ruifm/gitlinker.nvim',
     requires = 'nvim-lua/plenary.nvim',
