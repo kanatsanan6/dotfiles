@@ -4,8 +4,6 @@ vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 
-vim.opt.shortmess:append({ I = true })
-
 vim.opt.showmode = false
 vim.wo.number = true
 vim.opt_local.conceallevel = 2
