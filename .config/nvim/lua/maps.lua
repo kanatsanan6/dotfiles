@@ -16,6 +16,7 @@ keymap.set('n', '<M-l>', ':TmuxNavigateRight<cr>', opts)
 
 -- git
 keymap.set('n', '<leader>gg', ':LazyGit <cr>', opts)
+keymap.set('n', '<leader>gp', ':!gh pr view -w <cr>')
 
 -- page down and page up to be auto-centered
 keymap.set('n', '<C-d>', '<C-d>zz')

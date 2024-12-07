@@ -22,6 +22,7 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 export PATH="$PATH:/Users/kanatsananj/.asdf/shims/standardrb"
 export PATH=/bin:/usr/bin:/usr/local/bin:${PATH}
 export NODE_OPTIONS="--openssl-legacy-provider"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
