@@ -21,8 +21,12 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {f
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
-    local opts = { buffer = event.buf }
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+     if client.name == 'rubocop' then
+      return -- Skip keybindings for rubocop
+    end
 
+    local opts = { buffer = event.buf }
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
     vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
@@ -74,7 +78,15 @@ cmp.setup({
 
 -- Setup language server
 ---- Ruby
-lspconfig.solargraph.setup({})
+lspconfig.solargraph.setup({
+  settings = {
+    solargraph = {
+      diagnostics = false,
+    },
+  },
+})
+
+lspconfig.rubocop.setup({})
 
 ---- Lua
 lspconfig.lua_ls.setup({
