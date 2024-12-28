@@ -7,7 +7,6 @@ local function openUrl(url)
     var gg = Application('Google Chrome');
     gg.activate();
 
-
     var exists = false
     for (win of gg.windows()) {
       var tabIndex =
