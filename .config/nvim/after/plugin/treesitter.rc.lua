@@ -1,6 +1,8 @@
 local status, ts = pcall(require, "nvim-treesitter.configs")
 if (not status) then return end
 
+require('nvim-ts-autotag').setup()
+
 ts.setup {
   diagnostics = { disable = { 'missing-fields' } },
   sync_install = false,
@@ -28,9 +30,6 @@ ts.setup {
     "ruby"
   },
   endwise = {
-    enable = true,
-  },
-  autotag = {
     enable = true,
   },
   context_commentstring = {
