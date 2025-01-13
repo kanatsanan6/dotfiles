@@ -14,6 +14,9 @@ keymap.set('n', '<M-j>', ':TmuxNavigateDown<cr>', opts)
 keymap.set('n', '<M-k>', ':TmuxNavigateUp<cr>', opts)
 keymap.set('n', '<M-l>', ':TmuxNavigateRight<cr>', opts)
 
+-- copy
+keymap.set({'n', 'v'}, '++', [["+y]])
+
 -- git
 keymap.set('n', '<leader>gg', ':LazyGit <cr>', opts)
 keymap.set('n', '<leader>gp', ':!gh pr view -w <cr>')
