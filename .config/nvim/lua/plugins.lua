@@ -32,6 +32,7 @@ packer.startup(function(use)
   use "lewis6991/gitsigns.nvim"
   use "lukas-reineke/indent-blankline.nvim"
   use "mg979/vim-visual-multi"
+  use 'Mofiqul/vscode.nvim'
   use "MunifTanjim/prettier.nvim"
   use "NeogitOrg/neogit"
   use "neovim/nvim-lspconfig" -- LSP

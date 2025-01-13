@@ -17,6 +17,14 @@ keymap.set('n', '<M-l>', ':TmuxNavigateRight<cr>', opts)
 -- copy
 keymap.set({'n', 'v'}, '++', [["+y]])
 
+-- terminal
+keymap.set('n', '<leader>st', function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd('J')
+  vim.api.nvim_win_set_height(0, 15)
+end, opts)
+
 -- git
 keymap.set('n', '<leader>gg', ':LazyGit <cr>', opts)
 keymap.set('n', '<leader>gp', ':!gh pr view -w <cr>')

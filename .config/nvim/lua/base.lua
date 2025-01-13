@@ -31,7 +31,7 @@ vim.opt.wrap = false
 vim.opt.backspace = { 'start', 'eol', 'indent' }
 vim.opt.path:append { '**' }
 vim.opt.wildignore:append { '*/node_modules/*' }
-vim.opt.scrolloff = 12
+vim.opt.scrolloff = 8
 vim.opt.cmdheight = 1
 vim.opt.signcolumn = 'yes'
 vim.opt.formatoptions:append { 'r' }
@@ -65,4 +65,12 @@ end
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "go",
   callback = go_settings
+})
+
+vim.api.nvim_create_autocmd("TermOpen" , {
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.cmd('startinsert')
+  end,
 })
