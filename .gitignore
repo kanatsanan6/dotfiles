@@ -4,4 +4,6 @@
 /.config/gh
 /.config/zed
 /.config/StardewValley
+/.config/todo-cli
+/.config/ngrok
 /.hammerspoon/env.lua
