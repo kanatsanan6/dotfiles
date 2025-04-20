@@ -12,4 +12,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- vim.cmd.colorscheme("kanagawa-dragon")
-vim.cmd.colorscheme("vscode")
