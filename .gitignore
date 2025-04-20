@@ -1,3 +1,4 @@
+/.config/irb/irb_history
 /.config/nvim/plugin
 /.config/github-copilot
 /.config/iterm2
@@ -7,3 +8,4 @@
 /.config/todo-cli
 /.config/ngrok
 /.hammerspoon/env.lua
+/tmux-client-*

@@ -11,10 +11,12 @@ hs.hotkey.bind(MODIFIER, "'", function()
   local screen = win:screen()
   local maxFrame = screen:frame()
 
-  local newWidth = maxFrame.w * 0.65
   local newHeight = maxFrame.h
-  local newX = maxFrame.x
+  local newWidth = newHeight * (16 / 9)
+
+  local newX = maxFrame.x + (maxFrame.w - newWidth) / 2
   local newY = maxFrame.y
 
   win:setFrame(hs.geometry.rect(newX, newY, newWidth, newHeight))
 end)
+

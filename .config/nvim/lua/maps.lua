@@ -17,6 +17,9 @@ keymap.set('n', '<M-l>', ':TmuxNavigateRight<cr>', opts)
 -- copy
 keymap.set({'n', 'v'}, '++', [["+y]])
 
+-- save
+keymap.set('n', '+++', ":w<cr>")
+
 -- terminal
 keymap.set('n', '<leader>st', function()
   vim.cmd.vnew()

@@ -13,23 +13,23 @@ shape = "Block"
 TERM = "xterm-256color"
 
 [font]
-size = 15
+size = 13
 
 [font.bold]
-family = "JetBrains Mono"
-style = "Regular"
+family = "DejaVu Sans Mono"
+style = "Book"
 
 [font.glyph_offset]
 x = 0
 y = 0
 
 [font.italic]
-family = "JetBrains Mono"
-style = "Italic"
+family = "DejaVu Sans Mono"
+style = "Book"
 
 [font.normal]
-family = "JetBrains Mono"
-style = "Regular"
+family = "DejaVu Sans Mono"
+style = "Book"
 
 [font.offset]
 x = 0
@@ -587,10 +587,10 @@ chars = "\u0006x"
 key = "W"
 mods = "Command"
 
-[[keyboard.bindings]]
-chars = "\u0006\u000F"
-key = "S"
-mods = "Command"
+# [[keyboard.bindings]]
+# chars = "\u0006\u000F"
+# key = "S"
+# mods = "Command"
 
 [[keyboard.bindings]]
 chars = "\u0006z"
@@ -1092,6 +1092,11 @@ key = "c"
 mods = "Command"
 chars = "++"
 
+[[keyboard.bindings]]
+key = "s"
+mods = "Command"
+chars = "+++"
+
 [mouse]
 hide_when_typing = false
 
@@ -1103,15 +1108,15 @@ mouse = "Middle"
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window]
-decorations = "Full"
+decorations = "None"
 opacity = 1
 option_as_alt = "None"
-startup_mode = "Maximized"
+startup_mode = "SimpleFullscreen"
 
 [window.dimensions]
 columns = 160
 lines = 48
 
 [window.padding]
-x = 0
+x = 320
 y = 0
