@@ -109,3 +109,7 @@ lspconfig.gopls.setup({
 lspconfig.jsonls.setup({
   on_attach = on_attach,
 })
+
+lspconfig.marksman.setup({
+  on_attach = on_attach,
+})
