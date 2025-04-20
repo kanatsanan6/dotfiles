@@ -29,6 +29,8 @@ packer.startup(function(use)
     "kevinhwang91/nvim-ufo",
     requires = { { "kevinhwang91/promise-async" } }
   }
+  use "L3MON4D3/LuaSnip"
+  use "saadparwaiz1/cmp_luasnip"
   use "lewis6991/gitsigns.nvim"
   use "lukas-reineke/indent-blankline.nvim"
   use "mg979/vim-visual-multi"
