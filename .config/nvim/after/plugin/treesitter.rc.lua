@@ -3,6 +3,11 @@ if (not status) then return end
 
 require('nvim-ts-autotag').setup()
 
+require('treesitter-context').setup({
+  enable = true,
+  max_lines = -1, -- no limit
+})
+
 ts.setup {
   diagnostics = { disable = { 'missing-fields' } },
   sync_install = false,
