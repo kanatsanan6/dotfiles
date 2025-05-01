@@ -15,5 +15,8 @@ ls.add_snippets("ruby", {
   }),
   s("itis", {
     t("it { is_expected.to "), i(1), t( " }")
-  })
+  }),
+  s("pry", {
+    t("binding.pry")
+  }),
 })

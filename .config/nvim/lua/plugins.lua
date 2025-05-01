@@ -10,6 +10,7 @@ packer.startup(function(use)
   use "chentoast/marks.nvim"
   use "christoomey/vim-tmux-navigator"
   use "datsfilipe/vesper.nvim"
+  use "dstein64/vim-startuptime"
   use "ellisonleao/gruvbox.nvim"
   use "sainnhe/gruvbox-material"
   use "f-person/git-blame.nvim"

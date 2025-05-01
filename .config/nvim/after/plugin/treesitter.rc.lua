@@ -5,7 +5,8 @@ require('nvim-ts-autotag').setup()
 
 require('treesitter-context').setup({
   enable = true,
-  max_lines = -1, -- no limit
+  max_lines = -1,
+  mode = 'topline',
 })
 
 ts.setup {

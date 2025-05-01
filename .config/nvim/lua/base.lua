@@ -17,7 +17,6 @@ vim.opt.backup = false
 vim.opt.background = 'dark'
 vim.opt.showcmd = true
 vim.opt.expandtab = true
-vim.opt.scrolloff = 10
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 vim.opt.inccommand = 'split'
 vim.opt.ignorecase = true
@@ -31,7 +30,7 @@ vim.opt.wrap = false
 vim.opt.backspace = { 'start', 'eol', 'indent' }
 vim.opt.path:append { '**' }
 vim.opt.wildignore:append { '*/node_modules/*' }
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 12
 vim.opt.cmdheight = 1
 vim.opt.signcolumn = 'yes'
 vim.opt.formatoptions:append { 'r' }
@@ -42,6 +41,7 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 vim.cmd([[
   set statusline=%{expand('%:~:.')}  " Relative path to the file
+  set statusline+=%{get(b:,'gitsigns_status','')}
   set statusline+=%=                 " Switch to the right side
   set statusline+=%l                 " Current line
   set statusline+=/%L                " Total lines
