@@ -13,27 +13,27 @@ shape = "Block"
 TERM = "xterm-256color"
 
 [font]
-size = 13
+size = 14
 
 [font.bold]
-family = "DejaVu Sans Mono"
-style = "Book"
+family = "JetBrains Mono"
+style = "Bold"
 
 [font.glyph_offset]
 x = 0
 y = 0
 
 [font.italic]
-family = "DejaVu Sans Mono"
-style = "Book"
+family = "JetBrains Mono"
+style = "Italic"
 
 [font.normal]
-family = "DejaVu Sans Mono"
-style = "Book"
+family = "JetBrains Mono"
+style = "Regular"
 
 [font.offset]
 x = 0
-y = 0
+y = 4
 
 [[hints.enabled]]
 command = "xdg-open"
@@ -60,6 +60,16 @@ key = "Q"
 mods = "Command"
 
 [[keyboard.bindings]]
+chars = "++a"
+key = "a"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "++e"
+key = "e"
+mods = "Command"
+
+[[keyboard.bindings]]
 chars = "\u001BOH"
 key = "Home"
 mode = "AppCursor"
@@ -82,6 +92,26 @@ mode = "~AppCursor"
 [[keyboard.bindings]]
 action = "ResetFontSize"
 key = "Key0"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "++1"
+key = "Key1"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "++2"
+key = "Key2"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "++3"
+key = "Key3"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "++4"
+key = "Key4"
 mods = "Command"
 
 [[keyboard.bindings]]
@@ -633,51 +663,6 @@ key = "Right"
 mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u00061"
-key = "Key1"
-mods = "Command"
-
-[[keyboard.bindings]]
-chars = "\u00062"
-key = "Key2"
-mods = "Command"
-
-[[keyboard.bindings]]
-chars = "\u00063"
-key = "Key3"
-mods = "Command"
-
-[[keyboard.bindings]]
-chars = "\u00064"
-key = "Key4"
-mods = "Command"
-
-[[keyboard.bindings]]
-chars = "\u00065"
-key = "Key5"
-mods = "Command"
-
-[[keyboard.bindings]]
-chars = "\u00066"
-key = "Key6"
-mods = "Command"
-
-[[keyboard.bindings]]
-chars = "\u00067"
-key = "Key7"
-mods = "Command"
-
-[[keyboard.bindings]]
-chars = "\u00068"
-key = "Key8"
-mods = "Command"
-
-[[keyboard.bindings]]
-chars = "\u00069"
-key = "Key9"
-mods = "Command"
-
-[[keyboard.bindings]]
 chars = "\u001Ba"
 key = "A"
 mods = "Alt"
@@ -1118,5 +1103,6 @@ columns = 160
 lines = 48
 
 [window.padding]
-x = 320
+x = 0
+# x = 280
 y = 0
