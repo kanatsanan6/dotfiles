@@ -20,6 +20,9 @@ require('spectre').setup({
       cmd = "<cmd>lua require('spectre').tab_shift()<cr>",
       desc = 'previous query'
     },
+  },
+  open_template = {
+    { path = "!db !spec" }
   }
 })
 

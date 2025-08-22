@@ -174,11 +174,11 @@ gui:
   # Whether to split the main window when viewing file changes.
   # One of: 'auto' | 'always'
   # If 'auto', only split the main window when a file has both staged and unstaged changes
-  splitDiff: auto
+  # splitDiff: auto
 
   # Default size for focused window. Window size can be changed from within Lazygit with '+' and '_' (but this won't change the default).
   # One of: 'normal' (default) | 'half' | 'full'
-  windowSize: normal
+  windowSize: half
 
   # Window border style.
   # One of 'rounded' (default) | 'single' | 'double' | 'hidden'
@@ -225,13 +225,13 @@ git:
   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:
     # Value of the --color arg in the git diff command. Some pagers want this to be set to 'always' and some want it set to 'never'
-    colorArg: never
+    colorArg: always
 
-    pager: "ydiff -p cat -s --wrap"
-    useConfig: false
+    # pager: "ydiff -p cat -s --wrap"
+    # useConfig: false
 
-    # e.g. 'difft --color=always'
-    externalDiffCommand: ""
+    # # e.g. 'difft --color=always'
+    # externalDiffCommand: ""
 
   # Config relating to committing
   commit:

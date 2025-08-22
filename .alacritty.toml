@@ -13,7 +13,7 @@ shape = "Block"
 TERM = "xterm-256color"
 
 [font]
-size = 14
+size = 13
 
 [font.bold]
 family = "JetBrains Mono"
@@ -1093,10 +1093,8 @@ mouse = "Middle"
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window]
-decorations = "None"
 opacity = 1
 option_as_alt = "None"
-startup_mode = "SimpleFullscreen"
 
 [window.dimensions]
 columns = 160

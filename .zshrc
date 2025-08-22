@@ -1,4 +1,4 @@
-ZSH_THEME=robbyrussell
+ZSH_THEME=""
 
 export PATH="$HOME/.local/bin:$PATH"
 
