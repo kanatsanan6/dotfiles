@@ -14,6 +14,9 @@ keymap.set('n', '<M-j>', ':TmuxNavigateDown<cr>', opts)
 keymap.set('n', '<M-k>', ':TmuxNavigateUp<cr>', opts)
 keymap.set('n', '<M-l>', ':TmuxNavigateRight<cr>', opts)
 
+keymap.set('n', '<C-]>', '<C-i>', { noremap = true })
+keymap.set('n', '<C-[>', '<C-o>', { noremap = true })
+
 -- copy
 keymap.set({'n', 'v'}, '++', [["+y]])
 
@@ -112,10 +115,15 @@ keymap.set('n', '<C-w><up>', '<C-w>+')
 keymap.set('n', '<C-w><down>', '<C-w>-')
 
 -- custom Ag
+-- command! -bang -nargs=* Files call fzf#vim#files(<q-args>, {'options': ['-i', '--ignore', '.idea']}, <bang>0)
 vim.cmd([[
   command! -bang -nargs=* AgExcludeTest call fzf#vim#ag(<q-args>, '--ignore spec', fzf#vim#with_preview(), <bang>0)
   command! -bang -nargs=* AgOnlyTest call fzf#vim#ag(<q-args>, '--ignore spec', fzf#vim#with_preview(), <bang>0)
-  command! -bang -nargs=* Files call fzf#vim#files(<q-args>, {'options': ['-i']}, <bang>0)
+  command! -bang -nargs=* Files call fzf#vim#files(
+      \ <q-args>,
+      \ {'source': 'rg --files --hidden --follow -g "!.git" -g "!.idea"',
+      \  'options': ['-i']},
+      \ <bang>0)
 ]])
 
 -- fzf

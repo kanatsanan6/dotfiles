@@ -1,6 +1,7 @@
-require("ibl").setup {
-  indent = { char = "▏" },
+require("ibl").setup(
+  {
+    indent = { char = { "┊" } },
+    whitespace = { highlight = { "Whitespace", "NonText" } },
   scope = { enabled = false },
-}
-
-vim.cmd [[autocmd FileType ruby setlocal indentkeys-=.]]
+  }
+)

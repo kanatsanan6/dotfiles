@@ -1,11 +1,10 @@
 vim.cmd("autocmd!")
 
+vim.wo.number = true
 vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
-
 vim.opt.showmode = false
-vim.wo.number = true
 vim.opt_local.conceallevel = 2
 vim.opt.relativenumber = true
 vim.opt.swapfile = false
@@ -41,7 +40,6 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 vim.cmd([[
   set statusline=%{expand('%:~:.')}  " Relative path to the file
-  set statusline+=%{get(b:,'gitsigns_status','')}
   set statusline+=%=                 " Switch to the right side
   set statusline+=%l                 " Current line
   set statusline+=/%L                " Total lines
