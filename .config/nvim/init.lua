@@ -135,7 +135,7 @@ require("packer").startup(function(use)
 	use {
 		"windwp/nvim-autopairs",
 		config = function()
-			require("nvim-autopairs")
+			require("nvim-autopairs").setup({})
 
 			local rule = require('nvim-autopairs.rule')
 			local cond = require('nvim-autopairs.conds')
