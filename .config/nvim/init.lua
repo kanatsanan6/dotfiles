@@ -10,6 +10,7 @@ vim.o.splitright = true
 vim.o.cursorline = true
 vim.o.signcolumn = 'yes'
 vim.o.updatetime = 250
+vim.o.ignorecase = true
 
 -- Plugins
 vim.cmd.packadd("packer.nvim")
@@ -21,7 +22,13 @@ require("packer").startup(function(use)
 		"ibhagwan/fzf-lua",
 		config = function()
 			require("fzf-lua").setup({
-				winopts = { height = 0.3, width = 1.0, row = 1.0, border = "none" },
+				winopts = {
+					height = 0.3,
+					width = 1.0,
+					row = 1.0,
+					border = "none",
+					header = false,
+				},
 			})
 		end,
 	}
@@ -161,6 +168,20 @@ vim.diagnostic.config({
   virtual_text = false
 })
 
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+     if client.name == "rubocop" then
+      return
+    end
+
+    local opts = { buffer = event.buf }
+    vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+    vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+  end,
+})
+
 -- Colorscheme
 vim.api.nvim_set_var("seoul256_background", 233)
 vim.cmd.colorscheme("seoul256")
@@ -172,7 +193,12 @@ vim.cmd.highlight("StatusLineNC guibg=NONE")
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "<ESC>", ":noh<CR>")
-vim.keymap.set("n", "<C-p>", function() FzfLua.global({ fzf_cli_args = "-i" }) end)
+vim.keymap.set("n", "<C-p>", function()
+	FzfLua.global({
+		previewer = false,
+		fzf_cli_args = "-i",
+	})
+end)
 vim.keymap.set("n", "<C-o>", function() FzfLua.buffers() end)
 vim.keymap.set("n", "<leader>R", function() FzfLua.grep_project({ hidden = true }) end)
 
@@ -185,6 +211,10 @@ vim.keymap.set("n", "<M-l>", ":TmuxNavigateRight<CR>")
 
 vim.keymap.set({ "n", "v" }, "++", [["+y]])
 vim.keymap.set("n", "+++", ":w<cr>")
+
+vim.keymap.set('n', 'te', ':tabedit<CR>')
+vim.keymap.set('n', '<S-Tab>', '<CMD>tabprevious<CR>')
+vim.keymap.set('n', '<Tab>', '<CMD>tabnext<CR>')
 
 -- AutoCmd
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -207,3 +237,11 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     vim.highlight.on_yank()
   end,
 })
+
+-- Binding frequency miss type command
+vim.cmd([[
+  command! -bar -nargs=* -complete=file -range=% -bang W         <line1>,<line2>write<bang> <args>
+  command! -bar -nargs=* -complete=file -range=% -bang Wq        <line1>,<line2>wq<bang> <args>
+  command! -bar                                  -bang Q         quit<bang>
+]])
+
