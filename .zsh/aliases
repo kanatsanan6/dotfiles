@@ -11,9 +11,10 @@ alias rc='rails c'
 alias rs='rails s'
 alias r='rails'
 alias test='bundle exec rspec --color'
-alias staging='bundle exec cap staging rails:c -- --nomultiline'
+alias remote='mcdo run bundle exec rails c "-- --nomultiline"'
 alias staging='./devops_scripts/ecs-task-ssh.sh v3-stg-tf'
 alias prod='bundle exec cap production rails:c -- --nomultiline'
+alias air='$(go env GOPATH)/bin/air'
 
 # Git
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
