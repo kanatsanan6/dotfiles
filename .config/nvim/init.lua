@@ -138,6 +138,16 @@ require("packer").startup(function(use)
 		end,
 	}
 
+	use {
+		"vim-test/vim-test",
+		config = function()
+			vim.api.nvim_set_var("test#neovim#start_normal", 1)
+			vim.api.nvim_set_var("test#neovim#term_position", "bot 15")
+			vim.api.nvim_set_var("test#ruby#use_binstubs", 0)
+			vim.api.nvim_set_var("test#strategy", "neovim")
+		end,
+	}
+
 	use { "wbthomason/packer.nvim" }
 	use {
 		"windwp/nvim-autopairs",
@@ -189,6 +199,25 @@ vim.cmd.colorscheme("seoul256")
 vim.cmd.highlight("statusline guibg=NONE")
 vim.cmd.highlight("StatusLineNC guibg=NONE")
 
+-- Functions
+
+local function isSpec(path)
+	if string.find(path, "_spec%.rb$") then
+		return true
+	end
+
+	return false
+end
+
+local function openFile(path)
+  if vim.fn.winnr("$") > 1 then
+    vim.cmd([[wincmd w]])
+    vim.api.nvim_command("edit " .. path)
+  else
+    vim.api.nvim_command("vsplit " .. path)
+  end
+end
+
 -- Keymaps
 vim.g.mapleader = " "
 
@@ -200,7 +229,7 @@ vim.keymap.set("n", "<C-p>", function()
 	})
 end)
 vim.keymap.set("n", "<C-o>", function() FzfLua.buffers() end)
-vim.keymap.set("n", "<leader>R", function() FzfLua.grep_project({ hidden = true }) end)
+vim.keymap.set("n", "<leader>R", function() FzfLua.grep_project({ hidden = true, rg_opts = "--hidden --glob '!*.sql'" }) end)
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>")
 
@@ -212,9 +241,27 @@ vim.keymap.set("n", "<M-l>", ":TmuxNavigateRight<CR>")
 vim.keymap.set({ "n", "v" }, "++", [["+y]])
 vim.keymap.set("n", "+++", ":w<cr>")
 
-vim.keymap.set('n', 'te', ':tabedit<CR>')
-vim.keymap.set('n', '<S-Tab>', '<CMD>tabprevious<CR>')
-vim.keymap.set('n', '<Tab>', '<CMD>tabnext<CR>')
+vim.keymap.set("n", "te", ":tabedit<CR>")
+vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>")
+vim.keymap.set("n", "<Tab>", ":tabnext<CR>")
+
+vim.keymap.set("n", "<leader>v", ":TestVisit<CR>")
+vim.keymap.set("n", "<leader>t", ":TestNearest<CR>")
+vim.keymap.set("n", "<leader>T", ":TestFile<CR>")
+vim.keymap.set("n", "<leader>o", function()
+	local curr_file = vim.api.nvim_buf_get_name(0)
+	local dest_file = ""
+
+	if isSpec(curr_file) then
+		dest_file = string.gsub(curr_file, "/spec/", "/app/")
+		dest_file = string.gsub(dest_file, "_spec%.rb$", ".rb")
+	else
+		dest_file = string.gsub(curr_file, "/app/", "/spec/")
+		dest_file = string.gsub(dest_file, "%.rb$", "_spec%.rb")
+	end
+
+	openFile(dest_file)
+end)
 
 -- AutoCmd
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
