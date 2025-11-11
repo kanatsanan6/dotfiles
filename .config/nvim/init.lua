@@ -8,14 +8,28 @@ vim.o.tabstop = 2
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.cursorline = true
-vim.o.signcolumn = 'yes'
+vim.o.signcolumn = "yes"
 vim.o.updatetime = 250
 vim.o.ignorecase = true
+vim.o.foldcolumn = "0"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 
 -- Plugins
 vim.cmd.packadd("packer.nvim")
 
 require("packer").startup(function(use)
+	use {
+		"bloznelis/before.nvim",
+		config = function()
+			local before = require('before')
+			before.setup()
+
+			vim.keymap.set('n', '<leader>[', before.jump_to_last_edit, {})
+			vim.keymap.set('n', '<leader>]', before.jump_to_next_edit, {})
+		end,
+	}
 	use { "christoomey/vim-tmux-navigator" }
 
 	use {
@@ -34,6 +48,18 @@ require("packer").startup(function(use)
 	}
 
 	use { "junegunn/seoul256.vim" }
+
+	use {
+		"kevinhwang91/nvim-ufo",
+		requires = { { "kevinhwang91/promise-async" } },
+		config = function()
+			require("ufo").setup({
+				provider_selector = function()
+					return { "treesitter", "indent" }
+				end
+			})
+		end,
+	}
 
 	use {
 		"lewis6991/gitsigns.nvim",
@@ -86,6 +112,15 @@ require("packer").startup(function(use)
 		end,
 	}
 
+	use "nvim-lua/plenary.nvim"
+	use "rebelot/kanagawa.nvim"
+
+	use {
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		requires = { {"nvim-lua/plenary.nvim"} }
+	}
+
 	use { "tpope/vim-fugitive" }
 	use { "tpope/vim-surround" }
 
@@ -101,7 +136,7 @@ require("packer").startup(function(use)
 					},
 				},
 				fuzzy = {
-					implementation = "prefer_rust",
+					implementation = "lua",
 					prebuilt_binaries = { force_version = "1.*" }
 				},
 				keymap = {
@@ -154,14 +189,14 @@ require("packer").startup(function(use)
 		config = function()
 			require("nvim-autopairs").setup({})
 
-			local rule = require('nvim-autopairs.rule')
-			local cond = require('nvim-autopairs.conds')
-			local npairs = require('nvim-autopairs')
+			local rule = require("nvim-autopairs.rule")
+			local cond = require("nvim-autopairs.conds")
+			local npairs = require("nvim-autopairs")
 
 			npairs.add_rules({
 				rule("$$", "$$", "tex")
-					:with_pair(cond.not_before_text(''))
-					:with_pair(cond.not_after_text(''))
+					:with_pair(cond.not_before_text(""))
+					:with_pair(cond.not_after_text(""))
 			})
 		end,
 	}
@@ -193,8 +228,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Colorscheme
-vim.api.nvim_set_var("seoul256_background", 233)
-vim.cmd.colorscheme("seoul256")
+-- vim.api.nvim_set_var("seoul256_background", 233)
+vim.cmd.colorscheme("kanagawa-dragon")
 
 vim.cmd.highlight("statusline guibg=NONE")
 vim.cmd.highlight("StatusLineNC guibg=NONE")
@@ -223,12 +258,13 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<ESC>", ":noh<CR>")
 vim.keymap.set("n", "<C-p>", function()
-	FzfLua.global({
+	FzfLua.files({
 		previewer = false,
 		fzf_cli_args = "-i",
 	})
 end)
-vim.keymap.set("n", "<C-o>", function() FzfLua.buffers() end)
+vim.keymap.set("n", "<leader>B", function() FzfLua.buffers() end)
+vim.keymap.set("n", "<C-o>", ":FzfLua lsp_document_symbols symbol_kinds={ function, method }<CR>")
 vim.keymap.set("n", "<leader>R", function() FzfLua.grep_project({ hidden = true, rg_opts = "--hidden --glob '!*.sql'" }) end)
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>")
@@ -245,9 +281,25 @@ vim.keymap.set("n", "te", ":tabedit<CR>")
 vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>")
 vim.keymap.set("n", "<Tab>", ":tabnext<CR>")
 
+-- harpoon
+local harpoon = require("harpoon")
+harpoon:setup()
+
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
+
+vim.keymap.set("n", "[[", function() harpoon:list():prev() end)
+vim.keymap.set("n", "]]", function() harpoon:list():next() end)
+
 vim.keymap.set("n", "<leader>v", ":TestVisit<CR>")
 vim.keymap.set("n", "<leader>t", ":TestNearest<CR>")
 vim.keymap.set("n", "<leader>T", ":TestFile<CR>")
+
 vim.keymap.set("n", "<leader>o", function()
 	local curr_file = vim.api.nvim_buf_get_name(0)
 	local dest_file = ""
@@ -262,6 +314,9 @@ vim.keymap.set("n", "<leader>o", function()
 
 	openFile(dest_file)
 end)
+
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
 -- AutoCmd
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -281,7 +336,7 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.on_yank()
   end,
 })
 
@@ -291,4 +346,3 @@ vim.cmd([[
   command! -bar -nargs=* -complete=file -range=% -bang Wq        <line1>,<line2>wq<bang> <args>
   command! -bar                                  -bang Q         quit<bang>
 ]])
-
