@@ -48,6 +48,7 @@ require("packer").startup(function(use)
 	}
 
 	use { "junegunn/seoul256.vim" }
+	use { "girishji/bufline.vim" }
 
 	use {
 		"kevinhwang91/nvim-ufo",
@@ -263,7 +264,7 @@ vim.keymap.set("n", "<C-p>", function()
 		fzf_cli_args = "-i",
 	})
 end)
-vim.keymap.set("n", "<leader>B", function() FzfLua.buffers() end)
+vim.keymap.set("n", "<leader>E", function() FzfLua.buffers() end)
 vim.keymap.set("n", "<C-o>", ":FzfLua lsp_document_symbols symbol_kinds={ function, method }<CR>")
 vim.keymap.set("n", "<leader>R", function() FzfLua.grep_project({ hidden = true, rg_opts = "--hidden --glob '!*.sql'" }) end)
 
@@ -299,6 +300,10 @@ vim.keymap.set("n", "]]", function() harpoon:list():next() end)
 vim.keymap.set("n", "<leader>v", ":TestVisit<CR>")
 vim.keymap.set("n", "<leader>t", ":TestNearest<CR>")
 vim.keymap.set("n", "<leader>T", ":TestFile<CR>")
+
+vim.keymap.set("n", "<s-tab>", ":bp<CR>")
+vim.keymap.set("n", "<tab>", ":bn<CR>")
+vim.keymap.set("n", "<leader>x", ":bd<CR>")
 
 vim.keymap.set("n", "<leader>o", function()
 	local curr_file = vim.api.nvim_buf_get_name(0)
@@ -346,3 +351,26 @@ vim.cmd([[
   command! -bar -nargs=* -complete=file -range=% -bang Wq        <line1>,<line2>wq<bang> <args>
   command! -bar                                  -bang Q         quit<bang>
 ]])
+Statusline = {}
+Statusline.active = function()
+  return table.concat { require('bufline').bufferstr(), "%=%y %P %l:%c %*" }
+end
+Statusline.inactive = function()
+  return " %F"
+end
+
+local aucmd_group = vim.api.nvim_create_augroup('StatuslineAutocmds', { clear = true })
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "BufAdd" }, {
+  group = aucmd_group,
+  pattern = "*",
+  callback = function()
+    vim.wo.statusline = "%!v:lua.Statusline.active()"
+  end,
+})
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+  group = aucmd_group,
+  pattern = "*",
+  callback = function()
+    vim.wo.statusline = "%!v:lua.Statusline.inactive()"
+  end,
+})
