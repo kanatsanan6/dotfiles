@@ -230,6 +230,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Colorscheme
 -- vim.api.nvim_set_var("seoul256_background", 233)
+-- vim.cmd.colorscheme("seoul256")
 vim.cmd.colorscheme("kanagawa-dragon")
 
 vim.cmd.highlight("statusline guibg=NONE")
