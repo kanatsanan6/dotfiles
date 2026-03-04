@@ -8,6 +8,7 @@
 	required = true
 [alias]
 	lg = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
+	cb = "!f(){ b=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || { echo \"Not a git repo (or detached HEAD).\"; exit 1; }; printf \"%s\" \"$b\" | pbcopy; echo \"Copied: $b\"; }; f"
 [core]
 	excludesfile = /Users/kanatsananj/.gitignore_global
   editor = nvim
@@ -34,6 +35,6 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [branch]
-  sort=-committerdate
+	sort = -committerdate
 [gpg]
 	format = ssh

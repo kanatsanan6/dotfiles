@@ -114,6 +114,7 @@ require("packer").startup(function(use)
 	}
 
 	use "nvim-lua/plenary.nvim"
+	use "rafamadriz/friendly-snippets"
 	use "rebelot/kanagawa.nvim"
 
 	use {
@@ -352,6 +353,7 @@ vim.cmd([[
   command! -bar -nargs=* -complete=file -range=% -bang Wq        <line1>,<line2>wq<bang> <args>
   command! -bar                                  -bang Q         quit<bang>
 ]])
+
 Statusline = {}
 Statusline.active = function()
   return table.concat { require('bufline').bufferstr(), "%=%y %P %l:%c %*" }
