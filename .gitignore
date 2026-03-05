@@ -1,12 +1,6 @@
-/.config/irb/irb_history
+/.config
+!/.config/lazygit
+!/.config/nvim
 /.config/nvim/plugin
-/.config/github-copilot
-/.config/iterm2
-/.config/gh
-/.config/zed
-/.config/StardewValley
-/.config/todo-cli
-/.config/ngrok
-/.config/yarn
 /.hammerspoon/env.lua
 /tmux-client-*
