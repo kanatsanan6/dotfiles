@@ -377,3 +377,9 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
     vim.wo.statusline = "%!v:lua.Statusline.inactive()"
   end,
 })
+
+-- autoload and autosave vim on enter/leave buffers
+vim.cmd([[
+au FocusGained,BufEnter * :silent! !
+au FocusLost,WinLeave * :silent! w
+]])
