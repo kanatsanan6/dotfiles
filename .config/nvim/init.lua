@@ -30,6 +30,14 @@ require("packer").startup(function(use)
 			vim.keymap.set('n', '<leader>]', before.jump_to_next_edit, {})
 		end,
 	}
+
+	use {
+		"chentoast/marks.nvim",
+		config = function()
+			require("marks").setup({})
+		end,
+	}
+
 	use { "christoomey/vim-tmux-navigator" }
 
 	use {
