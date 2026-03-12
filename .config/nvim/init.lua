@@ -131,6 +131,33 @@ require("packer").startup(function(use)
 		requires = { {"nvim-lua/plenary.nvim"} }
 	}
 
+	use {
+		"ThePrimeagen/99",
+		config = function()
+			local _99 = require("99")
+
+			_99.setup({
+				provider = _99.Providers.OpenCodeProvider,
+				model = "openai/gpt-5.3-codex",
+				completion = {
+					source = "native",
+				},
+			})
+
+			vim.keymap.set("v", "<leader>gv", function()
+				_99.visual()
+			end)
+
+			vim.keymap.set("n", "<leader>gx", function()
+				_99.stop_all_requests()
+			end)
+
+			vim.keymap.set("n", "<leader>gs", function()
+				_99.search()
+			end)
+		end,
+	}
+
 	use { "tpope/vim-fugitive" }
 	use { "tpope/vim-surround" }
 
