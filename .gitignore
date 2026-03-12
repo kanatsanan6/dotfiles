@@ -1,6 +1,9 @@
-/.config
+/.config/*
 !/.config/lazygit
 !/.config/nvim
+!/.config/nvim/init.lua
+!/.config/nvim/lsp/
+!/.config/nvim/lsp/*.lua
 /.config/nvim/plugin
 /.hammerspoon/env.lua
 /tmux-client-*
