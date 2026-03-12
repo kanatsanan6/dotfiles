@@ -116,7 +116,7 @@ require("packer").startup(function(use)
 		config = function()
 			require("treesitter-context").setup({
 				enable = true,
-				max_lines = -1,
+				max_lines = 5,
 				mode = "topline",
 			})
 		end,
@@ -393,10 +393,14 @@ vim.cmd([[
 
 Statusline = {}
 Statusline.active = function()
-  return table.concat { require('bufline').bufferstr(), "%=%y %P %l:%c %*" }
+  return table.concat {
+    " %f ",
+    require('bufline').bufferstr(),
+    "%=%y %P %l:%c %*",
+  }
 end
 Statusline.inactive = function()
-  return " %F"
+  return " %f"
 end
 
 local aucmd_group = vim.api.nvim_create_augroup('StatuslineAutocmds', { clear = true })
@@ -414,7 +418,6 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
     vim.wo.statusline = "%!v:lua.Statusline.inactive()"
   end,
 })
-
 -- autoload and autosave vim on enter/leave buffers
 vim.cmd([[
 au FocusGained,BufEnter * :silent! !
