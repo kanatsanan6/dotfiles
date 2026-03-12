@@ -127,12 +127,6 @@ require("packer").startup(function(use)
 	use "rebelot/kanagawa.nvim"
 
 	use {
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		requires = { {"nvim-lua/plenary.nvim"} }
-	}
-
-	use {
 		"ThePrimeagen/99",
 		config = function()
 			local _99 = require("99")
@@ -296,19 +290,20 @@ end
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "<ESC>", ":noh<CR>")
-vim.keymap.set("n", "<C-p>", function()
-	FzfLua.files({
-		previewer = false,
-		fzf_cli_args = "-i",
-	})
-end)
+
+-- fzf-lua
+vim.keymap.set("n", "<C-p>", function() FzfLua.files({ previewer = false, fzf_cli_args = "-i" }) end)
 vim.keymap.set("n", "<leader>E", function() FzfLua.buffers() end)
 vim.keymap.set("n", "<C-o>", ":FzfLua lsp_document_symbols symbol_kinds={ function, method }<CR>")
 vim.keymap.set("n", "<leader>R", function() FzfLua.grep_project({ hidden = true, rg_opts = "--hidden --glob '!*.sql'" }) end)
 
+-- oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>")
+
+-- lazygit
 vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
 
+-- tmux navigation
 vim.keymap.set("n", "<M-h>", ":TmuxNavigateLeft<CR>")
 vim.keymap.set("n", "<M-j>", ":TmuxNavigateDown<CR>")
 vim.keymap.set("n", "<M-k>", ":TmuxNavigateUp<CR>")
@@ -316,25 +311,6 @@ vim.keymap.set("n", "<M-l>", ":TmuxNavigateRight<CR>")
 
 vim.keymap.set({ "n", "v" }, "++", [["+y]])
 vim.keymap.set("n", "+++", ":w<cr>")
-
-vim.keymap.set("n", "te", ":tabedit<CR>")
-vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>")
-vim.keymap.set("n", "<Tab>", ":tabnext<CR>")
-
--- harpoon
-local harpoon = require("harpoon")
-harpoon:setup()
-
-vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
-vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
-
-vim.keymap.set("n", "[[", function() harpoon:list():prev() end)
-vim.keymap.set("n", "]]", function() harpoon:list():next() end)
 
 vim.keymap.set("n", "<leader>v", ":TestVisit<CR>")
 vim.keymap.set("n", "<leader>t", ":TestNearest<CR>")
