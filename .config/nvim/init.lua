@@ -237,8 +237,9 @@ end)
 -- LSP
 vim.lsp.enable({
 	"lua_ls",
-	"solargraph",
-	"rubocop",
+	"ruby-lsp",
+	-- "solargraph",
+	-- "rubocop",
 })
 
 vim.diagnostic.config({
