@@ -58,6 +58,7 @@ require("packer").startup(function(use)
 	use { "junegunn/seoul256.vim" }
 	use { "girishji/bufline.vim" }
 
+	use { "kdheepak/lazygit.nvim" }
 	use {
 		"kevinhwang91/nvim-ufo",
 		requires = { { "kevinhwang91/promise-async" } },
@@ -306,6 +307,7 @@ vim.keymap.set("n", "<C-o>", ":FzfLua lsp_document_symbols symbol_kinds={ functi
 vim.keymap.set("n", "<leader>R", function() FzfLua.grep_project({ hidden = true, rg_opts = "--hidden --glob '!*.sql'" }) end)
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>")
+vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
 
 vim.keymap.set("n", "<M-h>", ":TmuxNavigateLeft<CR>")
 vim.keymap.set("n", "<M-j>", ":TmuxNavigateDown<CR>")
