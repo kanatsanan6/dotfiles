@@ -21,17 +21,6 @@ vim.cmd.packadd("packer.nvim")
 
 require("packer").startup(function(use)
 	use {
-		"bloznelis/before.nvim",
-		config = function()
-			local before = require('before')
-			before.setup()
-
-			vim.keymap.set('n', '<leader>[', before.jump_to_last_edit, {})
-			vim.keymap.set('n', '<leader>]', before.jump_to_next_edit, {})
-		end,
-	}
-
-	use {
 		"chentoast/marks.nvim",
 		config = function()
 			require("marks").setup({})
@@ -55,7 +44,6 @@ require("packer").startup(function(use)
 		end,
 	}
 
-	use { "junegunn/seoul256.vim" }
 	use { "girishji/bufline.vim" }
 
 	use { "kdheepak/lazygit.nvim" }
@@ -238,8 +226,6 @@ end)
 vim.lsp.enable({
 	"lua_ls",
 	"ruby-lsp",
-	-- "solargraph",
-	-- "rubocop",
 })
 
 vim.diagnostic.config({
