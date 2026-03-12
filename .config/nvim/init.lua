@@ -354,35 +354,35 @@ vim.cmd([[
   command! -bar                                  -bang Q         quit<bang>
 ]])
 
-Statusline = {}
-Statusline.active = function()
-  return table.concat {
-    " %f ",
-    require('bufline').bufferstr(),
-    "%=%y %P %l:%c %*",
-  }
-end
-Statusline.inactive = function()
-  return " %f"
+-- Statusline
+local function statusline_active()
+	return table.concat({
+		" %f ",
+		require("bufline").bufferstr(),
+		"%=%y %P %l:%c %*",
+	})
 end
 
-local aucmd_group = vim.api.nvim_create_augroup('StatuslineAutocmds', { clear = true })
+_G.StatuslineActive = statusline_active
+
+local statusline_group = vim.api.nvim_create_augroup("StatuslineAutocmds", { clear = true })
+
+local function set_window_statusline(is_active)
+	vim.wo.statusline = is_active and "%!v:lua.StatuslineActive()" or " %f"
+end
+
 vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "BufAdd" }, {
-  group = aucmd_group,
-  pattern = "*",
-  callback = function()
-    vim.wo.statusline = "%!v:lua.Statusline.active()"
-  end,
+	group = statusline_group,
+	pattern = "*",
+	callback = function()
+		set_window_statusline(true)
+	end,
 })
+
 vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
-  group = aucmd_group,
-  pattern = "*",
-  callback = function()
-    vim.wo.statusline = "%!v:lua.Statusline.inactive()"
-  end,
+	group = statusline_group,
+	pattern = "*",
+	callback = function()
+		set_window_statusline(false)
+	end,
 })
--- autoload and autosave vim on enter/leave buffers
-vim.cmd([[
-au FocusGained,BufEnter * :silent! !
-au FocusLost,WinLeave * :silent! w
-]])
