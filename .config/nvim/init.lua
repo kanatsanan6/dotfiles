@@ -55,7 +55,12 @@ require("packer").startup(function(use)
 		end
 	}
 
-	use { "kdheepak/lazygit.nvim" }
+	use {
+		"kdheepak/lazygit.nvim",
+		config = function()
+			vim.g.lazygit_floating_window_scaling_factor = 1
+		end
+	}
 	use {
 		"kevinhwang91/nvim-ufo",
 		requires = { { "kevinhwang91/promise-async" } },
