@@ -107,7 +107,7 @@ require("packer").startup(function(use)
 		branch = "master",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "lua" , "ruby" },
+				ensure_installed = { "lua", "ruby" },
 				highlight = { enable = true },
 				indent = { enable = true, disable = { "ruby" } },
 				endwise = { enable = true },
@@ -234,8 +234,8 @@ require("packer").startup(function(use)
 
 			npairs.add_rules({
 				rule("$$", "$$", "tex")
-					:with_pair(cond.not_before_text(""))
-					:with_pair(cond.not_after_text(""))
+						:with_pair(cond.not_before_text(""))
+						:with_pair(cond.not_after_text(""))
 			})
 		end,
 	}
@@ -248,21 +248,21 @@ vim.lsp.enable({
 })
 
 vim.diagnostic.config({
-  virtual_text = false
+	virtual_text = false
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(event)
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
+	callback = function(event)
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-     if client.name == "rubocop" then
-      return
-    end
+		if client.name == "rubocop" then
+			return
+		end
 
-    local opts = { buffer = event.buf }
-    vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-    vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
-  end,
+		local opts = { buffer = event.buf }
+		vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+		vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+	end,
 })
 
 -- Colorscheme
@@ -298,12 +298,12 @@ local function isSpec(path)
 end
 
 local function openFile(path)
-  if vim.fn.winnr("$") > 1 then
-    vim.cmd([[wincmd w]])
-    vim.api.nvim_command("edit " .. path)
-  else
-    vim.api.nvim_command("vsplit " .. path)
-  end
+	if vim.fn.winnr("$") > 1 then
+		vim.cmd([[wincmd w]])
+		vim.api.nvim_command("edit " .. path)
+	else
+		vim.api.nvim_command("vsplit " .. path)
+	end
 end
 
 -- Keymaps
@@ -315,7 +315,8 @@ vim.keymap.set("n", "<ESC>", ":noh<CR>")
 vim.keymap.set("n", "<C-p>", function() FzfLua.files({ previewer = false, fzf_cli_args = "-i" }) end)
 vim.keymap.set("n", "<leader>E", function() FzfLua.buffers() end)
 vim.keymap.set("n", "<C-o>", ":FzfLua lsp_document_symbols symbol_kinds={ function, method }<CR>")
-vim.keymap.set("n", "<leader>R", function() FzfLua.grep_project({ hidden = true, rg_opts = "--hidden --glob '!*.sql'" }) end)
+vim.keymap.set("n", "<leader>R",
+	function() FzfLua.grep_project({ hidden = true, rg_opts = "--hidden --glob '!*.sql'" }) end)
 
 -- oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>")
@@ -370,14 +371,14 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 	callback = function()
-		vim.diagnostic.open_float(nil, { focus = false})
+		vim.diagnostic.open_float(nil, { focus = false })
 	end,
 })
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-  callback = function()
-    vim.hl.on_yank()
-  end,
+	callback = function()
+		vim.hl.on_yank()
+	end,
 })
 
 -- Binding frequency miss type command
