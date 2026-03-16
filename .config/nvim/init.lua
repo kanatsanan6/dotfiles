@@ -133,12 +133,14 @@ require("packer").startup(function(use)
 		"ThePrimeagen/99",
 		config = function()
 			local _99 = require("99")
+			local opencode_skills_dir = vim.fn.expand("~/.config/opencode/skills")
 
 			_99.setup({
 				provider = _99.Providers.OpenCodeProvider,
 				model = "openai/gpt-5.3-codex",
 				completion = {
 					source = "native",
+					custom_rules = { opencode_skills_dir },
 				},
 			})
 
