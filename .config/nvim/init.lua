@@ -44,7 +44,16 @@ require("packer").startup(function(use)
 		end,
 	}
 
-	use { "girishji/bufline.vim" }
+	use {
+		"girishji/bufline.vim",
+		config = function()
+			require("bufline").setup({
+				showbufnr = false,
+				emphasize = '',
+				highlight = true,
+			})
+		end
+	}
 
 	use { "kdheepak/lazygit.nvim" }
 	use {
@@ -254,6 +263,20 @@ vim.cmd.colorscheme("kanagawa-dragon")
 vim.cmd.highlight("statusline guibg=NONE")
 vim.cmd.highlight("StatusLineNC guibg=NONE")
 
+local function set_bufline_highlights()
+	vim.api.nvim_set_hl(0, "User1", { fg = "black", bg = "#8ea4a2", bold = true })
+	vim.api.nvim_set_hl(0, "User2", { fg = "#8ea4a2", bg = "NONE" })
+	vim.api.nvim_set_hl(0, "User3", { fg = "#8ea4a2", bg = "NONE" })
+	vim.api.nvim_set_hl(0, "User4", { fg = "#8ea4a2", bg = "NONE", bold = true })
+end
+
+set_bufline_highlights()
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = vim.api.nvim_create_augroup("BuflineHighlights", { clear = true }),
+	callback = set_bufline_highlights,
+})
+
 -- Functions
 
 local function isSpec(path)
@@ -357,9 +380,8 @@ vim.cmd([[
 -- Statusline
 local function statusline_active()
 	return table.concat({
-		" %f ",
 		require("bufline").bufferstr(),
-		"%=%y %P %l:%c %*",
+		"%= %f %*",
 	})
 end
 
@@ -368,7 +390,7 @@ _G.StatuslineActive = statusline_active
 local statusline_group = vim.api.nvim_create_augroup("StatuslineAutocmds", { clear = true })
 
 local function set_window_statusline(is_active)
-	vim.wo.statusline = is_active and "%!v:lua.StatuslineActive()" or " %f"
+	vim.wo.statusline = is_active and "%!v:lua.StatuslineActive()" or "%= %f"
 end
 
 vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "BufAdd" }, {
