@@ -34,8 +34,7 @@ end
 -- App shortcuts
 hs.hotkey.bind(MODIFIER, '1', function() openApp('Google Chrome') end)
 hs.hotkey.bind(MODIFIER, '2', function() openApp('Alacritty') end)
-hs.hotkey.bind(MODIFIER, '3', function() openApp('Visual Studio Code') end)
-hs.hotkey.bind(MODIFIER, '4', function() openApp('Slack') end)
+hs.hotkey.bind(MODIFIER, '3', function() openApp('Slack') end)
 
 -- Site shortcuMODIFIER
 hs.hotkey.bind(MODIFIER, 'j', function() openUrl(JIRA_URL) end)
