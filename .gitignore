@@ -7,3 +7,5 @@
 /.config/nvim/plugin
 /.hammerspoon/env.lua
 /tmux-client-*
+/tmp
+.DS_Store
