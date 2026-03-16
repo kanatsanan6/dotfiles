@@ -125,6 +125,7 @@ require("packer").startup(function(use)
 	}
 
 	use "nvim-lua/plenary.nvim"
+	use "qpkorr/vim-bufkill"
 	use "rafamadriz/friendly-snippets"
 	use "rebelot/kanagawa.nvim"
 
@@ -333,7 +334,7 @@ vim.keymap.set("n", "<leader>T", ":TestFile<CR>")
 
 vim.keymap.set("n", "<s-tab>", ":bp<CR>")
 vim.keymap.set("n", "<tab>", ":bn<CR>")
-vim.keymap.set("n", "<leader>x", ":bd<CR>")
+vim.keymap.set("n", "<leader>x", ":BD<CR>")
 
 vim.keymap.set("n", "<leader>o", function()
 	local curr_file = vim.api.nvim_buf_get_name(0)
