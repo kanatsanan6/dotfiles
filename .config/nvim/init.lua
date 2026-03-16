@@ -11,12 +11,24 @@ vim.o.cursorline = true
 vim.o.signcolumn = "yes"
 vim.o.updatetime = 250
 vim.o.ignorecase = true
+vim.o.smartcase = true
 vim.o.termguicolors = true
 vim.o.foldcolumn = "0"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.laststatus = 3
+vim.o.redrawtime = 10000
+vim.o.maxmempattern = 20000
+vim.o.colorcolumn = "120"
+vim.o.undofile = true
+vim.o.autoread = true
+
+-- Create undo directory if it doesn't exist
+local undodir = vim.fn.expand("~/.vim/undodir")
+if vim.fn.isdirectory(undodir) == 0 then
+	vim.fn.mkdir(undodir, "p")
+end
 
 -- Plugins
 vim.cmd.packadd("packer.nvim")
@@ -311,6 +323,21 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<ESC>", ":noh<CR>")
 
+-- Move line up/down
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '>-2<CR>gv=gv")
+
+-- indenting with visual mode
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
+-- copy filepath to clipboard
+vim.keymap.set("n", "<leader>cc", function()
+	local path = vim.fn.expand("%:P")
+	vim.fn.setreg("+", path)
+	print("file:", path)
+end)
+
 -- fzf-lua
 vim.keymap.set("n", "<C-p>", function() FzfLua.files({ previewer = false, fzf_cli_args = "-i" }) end)
 vim.keymap.set("n", "<leader>E", function() FzfLua.buffers() end)
@@ -360,8 +387,10 @@ vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
 -- AutoCmd
+local augroup = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
+
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	group = vim.api.nvim_create_augroup("packer_user_config", { clear = true }),
+	group = augroup,
 	pattern = "init.lua",
 	callback = function(opts)
 		vim.cmd("source " .. opts.file)
@@ -370,14 +399,40 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 })
 
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+	group = augroup,
 	callback = function()
 		vim.diagnostic.open_float(nil, { focus = false })
 	end,
 })
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+	group = augroup,
 	callback = function()
 		vim.hl.on_yank()
+	end,
+})
+
+-- Return to last edit position when opening files
+vim.api.nvim_create_autocmd("BufReadPost", {
+	group = augroup,
+	callback = function()
+		local mark = vim.api.nvim_buf_get_mark(0, '"')
+		local lcount = vim.api.nvim_buf_line_count(0)
+		local line = mark[1]
+		local ft = vim.bo.filetype
+		if line > 0 and line <= lcount
+				and vim.fn.index({ "commit", "gitrebase", "xxd" }, ft) == -1
+				and not vim.o.diff then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
+	end,
+})
+
+-- Auto-resize splits when window is resized
+vim.api.nvim_create_autocmd("VimResized", {
+	group = augroup,
+	callback = function()
+		vim.cmd("tabdo wincmd =")
 	end,
 })
 
