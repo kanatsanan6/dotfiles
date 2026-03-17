@@ -343,8 +343,22 @@ end)
 vim.keymap.set("n", "<C-p>", function() FzfLua.files({ previewer = false, fzf_cli_args = "-i" }) end)
 vim.keymap.set("n", "<leader>E", function() FzfLua.buffers() end)
 vim.keymap.set("n", "<C-o>", ":FzfLua lsp_document_symbols symbol_kinds={ function, method }<CR>")
+vim.keymap.set("n", "<leader>r",
+	function()
+		FzfLua.live_grep({
+			hidden = true,
+			silent = true,
+			rg_opts = "--hidden --glob '!*.sql'",
+		})
+	end)
 vim.keymap.set("n", "<leader>R",
-	function() FzfLua.grep_project({ hidden = true, rg_opts = "--hidden --glob '!*.sql'" }) end)
+	function()
+		FzfLua.live_grep({
+			hidden = true,
+			silent = true,
+			rg_opts = "--hidden --glob '!*.sql' --glob '!*_spec.rb'",
+		})
+	end)
 
 -- oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>")
