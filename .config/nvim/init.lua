@@ -260,7 +260,8 @@ vim.lsp.enable({
 })
 
 vim.diagnostic.config({
-	virtual_text = false
+	virtual_text = false,
+	signs = true,
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -363,6 +364,9 @@ vim.keymap.set("n", "+++", ":w<cr>")
 vim.keymap.set("n", "<leader>v", ":TestVisit<CR>")
 vim.keymap.set("n", "<leader>t", ":TestNearest<CR>")
 vim.keymap.set("n", "<leader>T", ":TestFile<CR>")
+vim.keymap.set("n", "<leader>d", function()
+	vim.diagnostic.open_float(nil, { focus = false })
+end)
 
 vim.keymap.set("n", "<s-tab>", ":bp<CR>")
 vim.keymap.set("n", "<tab>", ":bn<CR>")
@@ -395,13 +399,6 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	callback = function(opts)
 		vim.cmd("source " .. opts.file)
 		vim.cmd("PackerCompile")
-	end,
-})
-
-vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-	group = augroup,
-	callback = function()
-		vim.diagnostic.open_float(nil, { focus = false })
 	end,
 })
 
