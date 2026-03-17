@@ -24,6 +24,11 @@ vim.o.colorcolumn = "120"
 vim.o.undofile = true
 vim.o.autoread = true
 
+-- Set GIT_EDITOR to use nvr if Neovim and nvr are available
+if vim.fn.has('nvim') == 1 and vim.fn.executable('nvr') == 1 then
+	vim.env.GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+end
+
 -- Create undo directory if it doesn't exist
 local undodir = vim.fn.expand("~/.vim/undodir")
 if vim.fn.isdirectory(undodir) == 0 then
@@ -446,6 +451,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 		vim.cmd("tabdo wincmd =")
 	end,
 })
+
 
 -- Binding frequency miss type command
 vim.cmd([[

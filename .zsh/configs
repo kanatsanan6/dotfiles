@@ -34,6 +34,7 @@ export PATH=$PATH:$GOROOT/bin
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:/Users/kanatsananj/.asdf/shims/standardrb"
 export PATH=/bin:/usr/bin:/usr/local/bin:${PATH}
+export PATH="$PATH:/$HOME/Library/Python/3.9/bin"
 export NODE_OPTIONS="--openssl-legacy-provider"
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -69,3 +70,11 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
 setopt share_history # share command history data
+
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+    export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+else
+    export VISUAL="nvim"
+    export EDITOR="nvim"
+fi
