@@ -456,8 +456,9 @@ vim.cmd([[
 
 -- Statusline
 local function statusline_active()
+	local bufline_width = math.floor(vim.o.columns * 0.9)
 	return table.concat({
-		require("bufline").bufferstr(),
+		require("bufline").bufferstr(bufline_width),
 		"%= %f %*",
 	})
 end
