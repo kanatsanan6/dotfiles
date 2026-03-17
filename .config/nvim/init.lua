@@ -151,7 +151,7 @@ require("packer").startup(function(use)
 
 			_99.setup({
 				provider = _99.Providers.OpenCodeProvider,
-				model = "openai/gpt-5.3-codex",
+				model = "openai/gpt-5.4",
 				completion = {
 					source = "native",
 					custom_rules = { opencode_skills_dir },
