@@ -262,6 +262,7 @@ end)
 vim.lsp.enable({
 	"lua_ls",
 	"ruby-lsp",
+	"jsonls",
 })
 
 vim.diagnostic.config({
