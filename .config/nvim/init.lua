@@ -127,16 +127,6 @@ local plugins = {
 		},
 	},
 	{
-		src = "https://github.com/kdheepak/lazygit.nvim",
-		data = {
-			setup = function()
-				vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
-
-				vim.g.lazygit_floating_window_scaling_factor = 1
-			end,
-		},
-	},
-	{
 		src = "https://github.com/kevinhwang91/nvim-ufo",
 		data = {
 			setup = function()
@@ -263,7 +253,6 @@ local plugins = {
 			end,
 		},
 	},
-	{ src = "https://github.com/tpope/vim-fugitive" },
 	{ src = "https://github.com/tpope/vim-surround" },
 	{
 		src = "https://github.com/vim-test/vim-test",
