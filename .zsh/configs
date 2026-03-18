@@ -35,6 +35,7 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 export PATH="$PATH:/Users/kanatsananj/.asdf/shims/standardrb"
 export PATH=/bin:/usr/bin:/usr/local/bin:${PATH}
 export PATH="$PATH:/$HOME/Library/Python/3.9/bin"
+export PATH="$PATH:/$HOME/.local/share/bob/nvim-bin"
 export NODE_OPTIONS="--openssl-legacy-provider"
 export XDG_CONFIG_HOME="$HOME/.config"
 

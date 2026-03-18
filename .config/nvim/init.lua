@@ -36,227 +36,282 @@ if vim.fn.isdirectory(undodir) == 0 then
 end
 
 -- Plugins
-vim.cmd.packadd("packer.nvim")
+local plugins = {
+	{
+		src = "https://github.com/ThePrimeagen/99",
+		data = {
+			setup = function()
+				local _99 = require("99")
+				local opencode_skills_dir = vim.fn.expand("~/.config/opencode/skills")
 
-require("packer").startup(function(use)
-	use {
-		"chentoast/marks.nvim",
-		config = function()
-			require("marks").setup({})
-		end,
-	}
+				_99.setup({
+					provider = _99.Providers.OpenCodeProvider,
+					model = "openai/gpt-5.4",
+					completion = {
+						source = "native",
+						custom_rules = { opencode_skills_dir },
+					},
+				})
 
-	use { "christoomey/vim-tmux-navigator" }
+				vim.keymap.set("v", "<leader>gv", function()
+					_99.visual()
+				end)
 
-	use {
-		"ibhagwan/fzf-lua",
-		config = function()
-			require("fzf-lua").setup({
-				winopts = {
-					height = 0.3,
-					width = 1.0,
-					row = 1.0,
-					border = "none",
-					header = false,
-				},
-			})
-		end,
-	}
+				vim.keymap.set("n", "<leader>gx", function()
+					_99.stop_all_requests()
+				end)
 
-	use {
-		"girishji/bufline.vim",
-		config = function()
-			require("bufline").setup({
-				showbufnr = false,
-				emphasize = '',
-				highlight = true,
-			})
-		end
-	}
+				vim.keymap.set("n", "<leader>gs", function()
+					_99.search()
+				end)
+			end,
+		},
+	},
+	{
+		src = "https://github.com/chentoast/marks.nvim",
+		data = {
+			setup = function()
+				require("marks").setup({})
+			end,
+		},
+	},
+	{
+		src = "https://github.com/christoomey/vim-tmux-navigator",
+		data = {
+			setup = function()
+				vim.keymap.set("n", "<M-h>", ":TmuxNavigateLeft<CR>")
+				vim.keymap.set("n", "<M-j>", ":TmuxNavigateDown<CR>")
+				vim.keymap.set("n", "<M-k>", ":TmuxNavigateUp<CR>")
+				vim.keymap.set("n", "<M-l>", ":TmuxNavigateRight<CR>")
+			end,
+		}
+	},
+	{
+		src = "https://github.com/girishji/bufline.vim",
+		data = {
+			setup = function()
+				require("bufline").setup({
+					showbufnr = false,
+					emphasize = "",
+					highlight = true,
+				})
+			end,
+		},
+	},
+	{
+		src = "https://github.com/ibhagwan/fzf-lua",
+		data = {
+			setup = function()
+				vim.keymap.set("n", "<C-p>", function() FzfLua.files({ previewer = false, fzf_cli_args = "-i" }) end)
+				vim.keymap.set("n", "<C-o>", function()
+					FzfLua.lsp_document_symbols({ symbol_kinds = { "function", "method" } })
+				end)
 
-	use {
-		"kdheepak/lazygit.nvim",
-		config = function()
-			vim.g.lazygit_floating_window_scaling_factor = 1
-		end
-	}
-	use {
-		"kevinhwang91/nvim-ufo",
-		requires = { { "kevinhwang91/promise-async" } },
-		config = function()
-			require("ufo").setup({
-				provider_selector = function()
-					return { "treesitter", "indent" }
-				end
-			})
-		end,
-	}
+				vim.keymap.set("n", "<leader>r", function()
+					FzfLua.live_grep({ hidden = true, silent = true, rg_opts = "--hidden --glob '!*.sql'" })
+				end)
+				vim.keymap.set("n", "<leader>R", function()
+					FzfLua.live_grep({ hidden = true, silent = true, rg_opts = "--hidden --glob '!*.sql' --glob '!*_spec.rb'" })
+				end)
 
-	use {
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup {
-				signcolumn = auto,
-				on_attach = function()
-					vim.wo.signcolumn = "yes"
-				end
-			}
-		end,
-	}
+				require("fzf-lua").setup({
+					winopts = {
+						height = 0.3,
+						width = 1.0,
+						row = 1.0,
+						border = "none",
+						header = false,
+					},
+				})
+			end,
+		},
+	},
+	{
+		src = "https://github.com/kdheepak/lazygit.nvim",
+		data = {
+			setup = function()
+				vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
 
-	use {
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("ibl").setup(
-				{
+				vim.g.lazygit_floating_window_scaling_factor = 1
+			end,
+		},
+	},
+	{
+		src = "https://github.com/kevinhwang91/nvim-ufo",
+		data = {
+			setup = function()
+				vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+				vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+				require("ufo").setup({
+					provider_selector = function()
+						return { "treesitter", "indent" }
+					end,
+				})
+			end,
+		},
+	},
+	{ src = "https://github.com/kevinhwang91/promise-async" },
+	{
+		src = "https://github.com/lewis6991/gitsigns.nvim",
+		data = {
+			setup = function()
+				require("gitsigns").setup({
+					signcolumn = auto,
+					on_attach = function()
+						vim.wo.signcolumn = "yes"
+					end,
+				})
+			end,
+		},
+	},
+	{
+		src = "https://github.com/lukas-reineke/indent-blankline.nvim",
+		data = {
+			setup = function()
+				require("ibl").setup({
 					indent = { char = { "┊" } },
 					whitespace = { highlight = { "IblWhitespace" } },
 					scope = { enabled = false },
-				}
-			)
-		end,
-	}
-
-	use { "ntpeters/vim-better-whitespace" }
-
-	use {
-		"nvim-treesitter/nvim-treesitter",
-		branch = "master",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "lua", "ruby" },
-				highlight = { enable = true },
-				indent = { enable = true, disable = { "ruby" } },
-				endwise = { enable = true },
-			})
-		end,
-	}
-
-	use {
-		"nvim-treesitter/nvim-treesitter-context",
-		config = function()
-			require("treesitter-context").setup({
-				enable = true,
-				max_lines = 5,
-				mode = "topline",
-			})
-		end,
-	}
-
-	use "nvim-lua/plenary.nvim"
-	use "qpkorr/vim-bufkill"
-	use "rafamadriz/friendly-snippets"
-	use "rebelot/kanagawa.nvim"
-
-	use {
-		"ThePrimeagen/99",
-		config = function()
-			local _99 = require("99")
-			local opencode_skills_dir = vim.fn.expand("~/.config/opencode/skills")
-
-			_99.setup({
-				provider = _99.Providers.OpenCodeProvider,
-				model = "openai/gpt-5.4",
-				completion = {
-					source = "native",
-					custom_rules = { opencode_skills_dir },
-				},
-			})
-
-			vim.keymap.set("v", "<leader>gv", function()
-				_99.visual()
-			end)
-
-			vim.keymap.set("n", "<leader>gx", function()
-				_99.stop_all_requests()
-			end)
-
-			vim.keymap.set("n", "<leader>gs", function()
-				_99.search()
-			end)
-		end,
-	}
-
-	use { "tpope/vim-fugitive" }
-	use { "tpope/vim-surround" }
-
-	use {
-		"saghen/blink.cmp",
-		config = function()
-			require("blink.cmp").setup({
-				completion = {
-					documentation = { auto_show = true },
-					menu = { draw = { columns = { { "label", gap = 1 }, { "kind" } } } },
-					list = {
-						selection = { preselect = false, auto_insert = false },
+				})
+			end,
+		},
+	},
+	{ src = "https://github.com/ntpeters/vim-better-whitespace" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{
+		src = "https://github.com/nvim-treesitter/nvim-treesitter",
+		version = "master",
+		data = {
+			setup = function()
+				require("nvim-treesitter.configs").setup({
+					ensure_installed = { "lua", "ruby" },
+					highlight = { enable = true },
+					indent = { enable = true, disable = { "ruby" } },
+					endwise = { enable = true },
+				})
+			end,
+		},
+	},
+	{
+		src = "https://github.com/nvim-treesitter/nvim-treesitter-context",
+		data = {
+			setup = function()
+				require("treesitter-context").setup({
+					enable = true,
+					max_lines = 5,
+					mode = "topline",
+				})
+			end,
+		},
+	},
+	{ src = "https://github.com/qpkorr/vim-bufkill" },
+	{ src = "https://github.com/rafamadriz/friendly-snippets" },
+	{ src = "https://github.com/rebelot/kanagawa.nvim" },
+	{
+		src = "https://github.com/saghen/blink.cmp",
+		data = {
+			setup = function()
+				require("blink.cmp").setup({
+					completion = {
+						documentation = { auto_show = true },
+						menu = { draw = { columns = { { "label", gap = 1 }, { "kind" } } } },
+						list = {
+							selection = { preselect = false, auto_insert = false },
+						},
 					},
-				},
-				fuzzy = {
-					implementation = "lua",
-					prebuilt_binaries = { force_version = "1.*" }
-				},
-				keymap = {
-					preset = "none",
-					["<C-k>"] = { "select_prev", "fallback" },
-					["<C-j>"] = { "select_next", "fallback" },
-					["<CR>"] = { "accept", "fallback" }
-				},
-			})
-		end,
-	}
+					fuzzy = {
+						implementation = "lua",
+						prebuilt_binaries = { force_version = "1.*" },
+					},
+					keymap = {
+						preset = "none",
+						["<C-k>"] = { "select_prev", "fallback" },
+						["<C-j>"] = { "select_next", "fallback" },
+						["<CR>"] = { "accept", "fallback" },
+					},
+				})
+			end,
+		},
+	},
+	{
+		src = "https://github.com/stevearc/oil.nvim",
+		data = {
+			setup = function()
+				vim.keymap.set("n", "-", "<CMD>Oil<CR>")
 
-	use {
-		"stevearc/oil.nvim",
-		config = function()
-			require("oil").setup({
-				delete_to_trash = true,
-				view_options = {
-					show_hidden = true,
-					is_always_hidden = function(name, _)
-						local always_hidden = { ".git", ".vscode", ".idea" }
+				require("oil").setup({
+					delete_to_trash = true,
+					view_options = {
+						show_hidden = true,
+						is_always_hidden = function(name, _)
+							local always_hidden = { ".git", ".vscode", ".idea" }
 
-						for _, value in pairs(always_hidden) do
-							if value == name then return true end
-						end
+							for _, value in pairs(always_hidden) do
+								if value == name then
+									return true
+								end
+							end
 
-						return false
-					end,
-				},
-				keymaps = {
-					["<C-p>"] = false
-				},
-			})
-		end,
-	}
+							return false
+						end,
+					},
+					keymaps = {
+						["<C-p>"] = false,
+					},
+				})
+			end,
+		},
+	},
+	{ src = "https://github.com/tpope/vim-fugitive" },
+	{ src = "https://github.com/tpope/vim-surround" },
+	{
+		src = "https://github.com/vim-test/vim-test",
+		data = {
+			setup = function()
+				vim.keymap.set("n", "<leader>v", ":TestVisit<CR>")
+				vim.keymap.set("n", "<leader>t", ":TestNearest<CR>")
+				vim.keymap.set("n", "<leader>T", ":TestFile<CR>")
 
-	use {
-		"vim-test/vim-test",
-		config = function()
-			vim.api.nvim_set_var("test#neovim#start_normal", 1)
-			vim.api.nvim_set_var("test#neovim#term_position", "bot 15")
-			vim.api.nvim_set_var("test#ruby#use_binstubs", 0)
-			vim.api.nvim_set_var("test#strategy", "neovim")
-		end,
-	}
+				vim.api.nvim_set_var("test#neovim#start_normal", 1)
+				vim.api.nvim_set_var("test#neovim#term_position", "bot 15")
+				vim.api.nvim_set_var("test#ruby#use_binstubs", 0)
+				vim.api.nvim_set_var("test#strategy", "neovim")
+			end,
+		},
+	},
+	{
+		src = "https://github.com/windwp/nvim-autopairs",
+		data = {
+			setup = function()
+				require("nvim-autopairs").setup({})
 
-	use { "wbthomason/packer.nvim" }
-	use {
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup({})
+				local rule = require("nvim-autopairs.rule")
+				local cond = require("nvim-autopairs.conds")
+				local npairs = require("nvim-autopairs")
 
-			local rule = require("nvim-autopairs.rule")
-			local cond = require("nvim-autopairs.conds")
-			local npairs = require("nvim-autopairs")
+				npairs.add_rules({
+					rule("$$", "$$", "tex")
+							:with_pair(cond.not_before_text(""))
+							:with_pair(cond.not_after_text("")),
+				})
+			end,
+		},
+	},
+}
 
-			npairs.add_rules({
-				rule("$$", "$$", "tex")
-						:with_pair(cond.not_before_text(""))
-						:with_pair(cond.not_after_text(""))
-			})
-		end,
-	}
-end)
+vim.pack.add(plugins, {
+	load = function(plug)
+		local data = plug.spec.data or {}
+		local setup = data.setup
+
+		vim.cmd.packadd(plug.spec.name)
+
+		if setup ~= nil and type(setup) == "function" then
+			setup()
+		end
+	end,
+})
 
 -- LSP
 vim.lsp.enable({
@@ -285,8 +340,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Colorscheme
--- vim.api.nvim_set_var("seoul256_background", 233)
--- vim.cmd.colorscheme("seoul256")
 vim.cmd.colorscheme("kanagawa-dragon")
 
 vim.cmd.highlight("statusline guibg=NONE")
@@ -349,46 +402,10 @@ vim.keymap.set("n", "<leader>cc", function()
 	print("file:", path)
 end)
 
--- fzf-lua
-vim.keymap.set("n", "<C-p>", function() FzfLua.files({ previewer = false, fzf_cli_args = "-i" }) end)
-vim.keymap.set("n", "<leader>E", function() FzfLua.buffers() end)
-vim.keymap.set("n", "<C-o>", ":FzfLua lsp_document_symbols symbol_kinds={ function, method }<CR>")
-vim.keymap.set("n", "<leader>r",
-	function()
-		FzfLua.live_grep({
-			hidden = true,
-			silent = true,
-			rg_opts = "--hidden --glob '!*.sql'",
-		})
-	end)
-vim.keymap.set("n", "<leader>R",
-	function()
-		FzfLua.live_grep({
-			hidden = true,
-			silent = true,
-			rg_opts = "--hidden --glob '!*.sql' --glob '!*_spec.rb'",
-		})
-	end)
-
--- oil
-vim.keymap.set("n", "-", "<CMD>Oil<CR>")
-
--- lazygit
-vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
-
--- tmux navigation
-vim.keymap.set("n", "<M-h>", ":TmuxNavigateLeft<CR>")
-vim.keymap.set("n", "<M-j>", ":TmuxNavigateDown<CR>")
-vim.keymap.set("n", "<M-k>", ":TmuxNavigateUp<CR>")
-vim.keymap.set("n", "<M-l>", ":TmuxNavigateRight<CR>")
-
 vim.keymap.set("n", "++", [["+y]])
 vim.keymap.set("v", "++", [[mc"+y`c]])
 vim.keymap.set("n", "+++", ":w<cr>")
 
-vim.keymap.set("n", "<leader>v", ":TestVisit<CR>")
-vim.keymap.set("n", "<leader>t", ":TestNearest<CR>")
-vim.keymap.set("n", "<leader>T", ":TestFile<CR>")
 vim.keymap.set("n", "<leader>d", function()
 	vim.diagnostic.open_float(nil, { focus = false })
 end)
@@ -412,20 +429,8 @@ vim.keymap.set("n", "<leader>o", function()
 	openFile(dest_file)
 end)
 
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-
 -- AutoCmd
-local augroup = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
-
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	group = augroup,
-	pattern = "init.lua",
-	callback = function(opts)
-		vim.cmd("source " .. opts.file)
-		vim.cmd("PackerCompile")
-	end,
-})
+local augroup = vim.api.nvim_create_augroup("user_config", { clear = true })
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	group = augroup,
@@ -457,7 +462,6 @@ vim.api.nvim_create_autocmd("VimResized", {
 		vim.cmd("tabdo wincmd =")
 	end,
 })
-
 
 -- Binding frequency miss type command
 vim.cmd([[
