@@ -332,11 +332,15 @@ vim.keymap.set("n", "<ESC>", ":noh<CR>")
 
 -- Move line up/down
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<A-k>", ":m '>-2<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- indenting with visual mode
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "y", "mcy`c")
 
 -- copy filepath to clipboard
 vim.keymap.set("n", "<leader>cc", function()
@@ -378,7 +382,8 @@ vim.keymap.set("n", "<M-j>", ":TmuxNavigateDown<CR>")
 vim.keymap.set("n", "<M-k>", ":TmuxNavigateUp<CR>")
 vim.keymap.set("n", "<M-l>", ":TmuxNavigateRight<CR>")
 
-vim.keymap.set({ "n", "v" }, "++", [["+y]])
+vim.keymap.set("n", "++", [["+y]])
+vim.keymap.set("v", "++", [[mc"+y`c]])
 vim.keymap.set("n", "+++", ":w<cr>")
 
 vim.keymap.set("n", "<leader>v", ":TestVisit<CR>")
