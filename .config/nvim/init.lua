@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.swapfile = false
@@ -253,6 +255,24 @@ local plugins = {
 			end,
 		},
 	},
+	{ src = "https://github.com/tpope/vim-dispatch" },
+	{
+		src = "https://github.com/tpope/vim-projectionist",
+		data = {
+			setup = function()
+				vim.g.projectionist_heuristics = {
+					["*"] = {
+						["app/*.rb"] = {
+							alternate = "spec/{}_spec.rb"
+						},
+						["spec/*_spec.rb"] = {
+							alternate = "app/{}.rb"
+						},
+					},
+				}
+			end,
+		}
+	},
 	{ src = "https://github.com/tpope/vim-surround" },
 	{
 		src = "https://github.com/vim-test/vim-test",
@@ -262,10 +282,11 @@ local plugins = {
 				vim.keymap.set("n", "<leader>t", ":TestNearest<CR>")
 				vim.keymap.set("n", "<leader>T", ":TestFile<CR>")
 
+				vim.api.nvim_set_var("test#ruby#rspec#options", "--format progress --no-color")
 				vim.api.nvim_set_var("test#neovim#start_normal", 1)
 				vim.api.nvim_set_var("test#neovim#term_position", "bot 15")
 				vim.api.nvim_set_var("test#ruby#use_binstubs", 0)
-				vim.api.nvim_set_var("test#strategy", "neovim")
+				vim.api.nvim_set_var("test#strategy", "dispatch")
 			end,
 		},
 	},
@@ -348,28 +369,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = set_bufline_highlights,
 })
 
--- Functions
-
-local function isSpec(path)
-	if string.find(path, "_spec%.rb$") then
-		return true
-	end
-
-	return false
-end
-
-local function openFile(path)
-	if vim.fn.winnr("$") > 1 then
-		vim.cmd([[wincmd w]])
-		vim.api.nvim_command("edit " .. path)
-	else
-		vim.api.nvim_command("vsplit " .. path)
-	end
-end
-
--- Keymaps
-vim.g.mapleader = " "
-
 vim.keymap.set("n", "<ESC>", ":noh<CR>")
 
 -- Move line up/down
@@ -383,6 +382,13 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "y", "mcy`c")
+
+vim.keymap.set("n", "<Up>", ":resize +2<CR>")
+vim.keymap.set("n", "<Down>", ":resize -2<CR>")
+vim.keymap.set("n", "<Right>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<Left>", ":vertical resize +2<CR>")
+
+vim.keymap.set("n", "<leader>n", ":e project-note<cr>")
 
 -- copy filepath to clipboard
 vim.keymap.set("n", "<leader>cc", function()
@@ -402,21 +408,7 @@ end)
 vim.keymap.set("n", "<s-tab>", ":bp<CR>")
 vim.keymap.set("n", "<tab>", ":bn<CR>")
 vim.keymap.set("n", "<leader>x", ":BD<CR>")
-
-vim.keymap.set("n", "<leader>o", function()
-	local curr_file = vim.api.nvim_buf_get_name(0)
-	local dest_file = ""
-
-	if isSpec(curr_file) then
-		dest_file = string.gsub(curr_file, "/spec/", "/app/")
-		dest_file = string.gsub(dest_file, "_spec%.rb$", ".rb")
-	else
-		dest_file = string.gsub(curr_file, "/app/", "/spec/")
-		dest_file = string.gsub(dest_file, "%.rb$", "_spec%.rb")
-	end
-
-	openFile(dest_file)
-end)
+vim.keymap.set("n", "<leader>o", ":A<CR>")
 
 -- AutoCmd
 local augroup = vim.api.nvim_create_augroup("user_config", { clear = true })
