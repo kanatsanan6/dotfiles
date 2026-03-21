@@ -26,17 +26,6 @@ vim.o.colorcolumn = "120"
 vim.o.undofile = true
 vim.o.autoread = true
 
--- Set GIT_EDITOR to use nvr if Neovim and nvr are available
-if vim.fn.has('nvim') == 1 and vim.fn.executable('nvr') == 1 then
-	vim.env.GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
-end
-
--- Create undo directory if it doesn't exist
-local undodir = vim.fn.expand("~/.vim/undodir")
-if vim.fn.isdirectory(undodir) == 0 then
-	vim.fn.mkdir(undodir, "p")
-end
-
 -- Plugins
 local plugins = {
 	{
@@ -62,10 +51,6 @@ local plugins = {
 				vim.keymap.set("n", "<leader>gx", function()
 					_99.stop_all_requests()
 				end)
-
-				vim.keymap.set("n", "<leader>gs", function()
-					_99.search()
-				end)
 			end,
 		},
 	},
@@ -81,10 +66,12 @@ local plugins = {
 		src = "https://github.com/christoomey/vim-tmux-navigator",
 		data = {
 			setup = function()
-				vim.keymap.set("n", "<M-h>", ":TmuxNavigateLeft<CR>")
-				vim.keymap.set("n", "<M-j>", ":TmuxNavigateDown<CR>")
-				vim.keymap.set("n", "<M-k>", ":TmuxNavigateUp<CR>")
-				vim.keymap.set("n", "<M-l>", ":TmuxNavigateRight<CR>")
+				local opts = { silent = true }
+
+				vim.keymap.set("n", "<M-h>", ":TmuxNavigateLeft<CR>", opts)
+				vim.keymap.set("n", "<M-j>", ":TmuxNavigateDown<CR>", opts)
+				vim.keymap.set("n", "<M-k>", ":TmuxNavigateUp<CR>", opts)
+				vim.keymap.set("n", "<M-l>", ":TmuxNavigateRight<CR>", opts)
 			end,
 		}
 	},
@@ -132,9 +119,6 @@ local plugins = {
 		src = "https://github.com/kevinhwang91/nvim-ufo",
 		data = {
 			setup = function()
-				vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-				vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-
 				require("ufo").setup({
 					provider_selector = function()
 						return { "treesitter", "indent" }
@@ -263,10 +247,10 @@ local plugins = {
 				vim.g.projectionist_heuristics = {
 					["*"] = {
 						["app/*.rb"] = {
-							alternate = "spec/{}_spec.rb"
+							alternate = "spec/{}_spec.rb",
 						},
 						["spec/*_spec.rb"] = {
-							alternate = "app/{}.rb"
+							alternate = "app/{}.rb",
 						},
 					},
 				}
@@ -364,11 +348,6 @@ end
 
 set_bufline_highlights()
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-	group = vim.api.nvim_create_augroup("BuflineHighlights", { clear = true }),
-	callback = set_bufline_highlights,
-})
-
 vim.keymap.set("n", "<ESC>", ":noh<CR>")
 
 -- Move line up/down
@@ -390,20 +369,12 @@ vim.keymap.set("n", "<Left>", ":vertical resize +2<CR>")
 
 vim.keymap.set("n", "<leader>n", ":e project-note<cr>")
 
--- copy filepath to clipboard
-vim.keymap.set("n", "<leader>cc", function()
-	local path = vim.fn.expand("%:P")
-	vim.fn.setreg("+", path)
-	print("file:", path)
-end)
-
 vim.keymap.set("n", "++", [["+y]])
 vim.keymap.set("v", "++", [[mc"+y`c]])
 vim.keymap.set("n", "+++", ":w<cr>")
 
-vim.keymap.set("n", "<leader>d", function()
-	vim.diagnostic.open_float(nil, { focus = false })
-end)
+vim.keymap.set("n", "<leader>cc", function() vim.fn.setreg("+", vim.fn.expand("%:P")) end)
+vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float(nil, { focus = false }) end)
 
 vim.keymap.set("n", "<s-tab>", ":bp<CR>")
 vim.keymap.set("n", "<tab>", ":bn<CR>")
@@ -411,6 +382,11 @@ vim.keymap.set("n", "<leader>x", ":BD<CR>")
 vim.keymap.set("n", "<leader>o", ":A<CR>")
 
 -- AutoCmd
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = vim.api.nvim_create_augroup("BuflineHighlights", { clear = true }),
+	callback = set_bufline_highlights,
+})
+
 local augroup = vim.api.nvim_create_augroup("user_config", { clear = true })
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
@@ -441,6 +417,14 @@ vim.api.nvim_create_autocmd("VimResized", {
 	group = augroup,
 	callback = function()
 		vim.cmd("tabdo wincmd =")
+	end,
+})
+
+-- no auto continue comments on new line
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("no_auto_comment", {}),
+	callback = function()
+		vim.opt_local.formatoptions:remove({ "c", "r", "o" })
 	end,
 })
 
