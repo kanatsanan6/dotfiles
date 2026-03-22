@@ -376,6 +376,10 @@ vim.keymap.set("n", "+++", ":w<cr>")
 vim.keymap.set("n", "<leader>cc", function() vim.fn.setreg("+", vim.fn.expand("%:P")) end)
 vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float(nil, { focus = false }) end)
 
+vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-w>")
+vim.keymap.set({ "i", "c" }, "<M-BS>", "<C-w>")
+vim.keymap.set({ "i", "c" }, "<C-h>", "<C-w>")
+
 vim.keymap.set("n", "<s-tab>", ":bp<CR>")
 vim.keymap.set("n", "<tab>", ":bn<CR>")
 vim.keymap.set("n", "<leader>x", ":BD<CR>")
