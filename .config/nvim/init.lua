@@ -1,3 +1,5 @@
+-- ==== Core Options ==========================================================
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.o.number = true
@@ -26,7 +28,8 @@ vim.o.colorcolumn = "120"
 vim.o.undofile = true
 vim.o.autoread = true
 
--- Plugins
+-- ==== Plugins ===============================================================
+
 local plugins = {
 	{
 		src = "https://github.com/ThePrimeagen/99",
@@ -307,7 +310,8 @@ vim.pack.add(plugins, {
 	end,
 })
 
--- LSP
+-- ==== LSP ===================================================================
+
 vim.lsp.enable({
 	"lua_ls",
 	"ruby-lsp",
@@ -333,7 +337,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Colorscheme
+-- ==== Colorscheme ===========================================================
+
 vim.cmd.colorscheme("kanagawa-dragon")
 
 vim.cmd.highlight("statusline guibg=NONE")
@@ -347,6 +352,8 @@ local function set_bufline_highlights()
 end
 
 set_bufline_highlights()
+
+-- ==== Keymaps ===============================================================
 
 vim.keymap.set("n", "<ESC>", ":noh<CR>")
 
@@ -385,7 +392,8 @@ vim.keymap.set("n", "<tab>", ":bn<CR>")
 vim.keymap.set("n", "<leader>x", ":BD<CR>")
 vim.keymap.set("n", "<leader>o", ":A<CR>")
 
--- AutoCmd
+-- ==== Autocommands ==========================================================
+
 vim.api.nvim_create_autocmd("ColorScheme", {
 	group = vim.api.nvim_create_augroup("BuflineHighlights", { clear = true }),
 	callback = set_bufline_highlights,
@@ -432,14 +440,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Binding frequency miss type command
+-- ==== User Commands =========================================================
+
 vim.cmd([[
   command! -bar -nargs=* -complete=file -range=% -bang W         <line1>,<line2>write<bang> <args>
   command! -bar -nargs=* -complete=file -range=% -bang Wq        <line1>,<line2>wq<bang> <args>
   command! -bar                                  -bang Q         quit<bang>
 ]])
 
--- Statusline
+-- ==== Statusline ============================================================
+
 local function statusline_active()
 	local bufline_width = math.floor(vim.o.columns * 0.9)
 	return table.concat({
