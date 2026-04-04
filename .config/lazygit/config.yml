@@ -16,3 +16,6 @@ gui:
     activeBorderColor:
       - white
       - bold
+git:
+  paging:
+    pager: diff-so-fancy

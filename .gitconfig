@@ -12,6 +12,7 @@
 [core]
 	excludesfile = /Users/kanatsananj/.gitignore_global
   editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RF
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
@@ -38,3 +39,5 @@
 	sort = -committerdate
 [gpg]
 	format = ssh
+[interactive]
+	diffFilter = diff-so-fancy --patch
