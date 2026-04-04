@@ -39,8 +39,8 @@ local plugins = {
 				local opencode_skills_dir = vim.fn.expand("~/.config/opencode/skills")
 
 				_99.setup({
-					provider = _99.Providers.OpenCodeProvider,
-					model = "openai/gpt-5.4",
+					provider = _99.Providers.ClaudeCodeProvider,
+					model = "claude-opus-4-6",
 					completion = {
 						source = "native",
 						custom_rules = { opencode_skills_dir },
@@ -49,6 +49,10 @@ local plugins = {
 
 				vim.keymap.set("v", "<leader>gv", function()
 					_99.visual()
+				end)
+
+				vim.keymap.set("v", "<leader>gs", function()
+					_99.search()
 				end)
 
 				vim.keymap.set("n", "<leader>gx", function()
@@ -91,19 +95,47 @@ local plugins = {
 		},
 	},
 	{
+		src = "https://github.com/ThePrimeagen/harpoon",
+		version = "harpoon2",
+		data = {
+			setup = function()
+				local harpoon = require("harpoon")
+				harpoon:setup()
+
+				vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+				vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+				for i = 1, 5 do
+					vim.keymap.set("n", "<leader>" .. i, function() harpoon:list():select(i) end)
+				end
+			end,
+		},
+	},
+	{
+		src = "https://github.com/h3pei/ruby-fqcn.nvim",
+		data = {
+			setup = function()
+				vim.keymap.set("n", "<leader>cf", ":CopyRubyFQCN<CR>")
+			end
+		}
+	},
+	{
 		src = "https://github.com/ibhagwan/fzf-lua",
 		data = {
 			setup = function()
+				local fzf_actions = require("fzf-lua.actions")
+
 				vim.keymap.set("n", "<C-p>", function() FzfLua.files({ previewer = false, fzf_cli_args = "-i" }) end)
 				vim.keymap.set("n", "<C-o>", function()
 					FzfLua.lsp_document_symbols({ symbol_kinds = { "function", "method" } })
 				end)
 
 				vim.keymap.set("n", "<leader>r", function()
-					FzfLua.live_grep({ hidden = true, silent = true, rg_opts = "--hidden --glob '!*.sql'" })
+					FzfLua.live_grep({ hidden = true, silent = true, rg_opts = "--hidden --glob '!.opencode' --glob '!*.sql'" })
 				end)
 				vim.keymap.set("n", "<leader>R", function()
-					FzfLua.live_grep({ hidden = true, silent = true, rg_opts = "--hidden --glob '!*.sql' --glob '!*_spec.rb'" })
+					FzfLua.live_grep({ hidden = true, silent = true, rg_opts =
+					"--hidden --glob '!.opencode' --glob '!*.sql' --glob '!*_spec.rb'" })
 				end)
 
 				require("fzf-lua").setup({
@@ -114,6 +146,17 @@ local plugins = {
 						border = "none",
 						header = false,
 					},
+					keymap = {
+						fzf = {
+							["alt-a"] = "select-all"
+						}
+					},
+					actions = {
+						files = {
+							[1] = true,
+							["ctrl-q"] = fzf_actions.file_sel_to_qf,
+						},
+					}
 				})
 			end,
 		},
@@ -166,25 +209,20 @@ local plugins = {
 				require("nvim-treesitter.configs").setup({
 					ensure_installed = { "lua", "ruby" },
 					highlight = { enable = true },
-					indent = { enable = true, disable = { "ruby" } },
+					indent = { enable = true },
 					endwise = { enable = true },
 				})
 			end,
 		},
 	},
 	{
-		src = "https://github.com/nvim-treesitter/nvim-treesitter-context",
+		src = "https://github.com/qpkorr/vim-bufkill",
 		data = {
 			setup = function()
-				require("treesitter-context").setup({
-					enable = true,
-					max_lines = 5,
-					mode = "topline",
-				})
+				vim.g.BufKillActionWhenBufferDisplayedInAnotherWindow = "kill"
 			end,
 		},
 	},
-	{ src = "https://github.com/qpkorr/vim-bufkill" },
 	{ src = "https://github.com/rafamadriz/friendly-snippets" },
 	{ src = "https://github.com/rebelot/kanagawa.nvim" },
 	{
@@ -242,6 +280,14 @@ local plugins = {
 			end,
 		},
 	},
+	{
+		src = "https://github.com/stevearc/quicker.nvim",
+		data = {
+			setup = function()
+				require("quicker").setup()
+			end
+		}
+	},
 	{ src = "https://github.com/tpope/vim-dispatch" },
 	{
 		src = "https://github.com/tpope/vim-projectionist",
@@ -291,6 +337,16 @@ local plugins = {
 					rule("$$", "$$", "tex")
 							:with_pair(cond.not_before_text(""))
 							:with_pair(cond.not_after_text("")),
+
+					rule("|", "|", "ruby")
+							:with_pair(function(opts)
+								local before = opts.line:sub(1, opts.col)
+								if before:match("do%s*$") or before:match("{%s*$") then
+									return true
+								end
+								return false
+							end)
+							:with_move(cond.after_text("|")),
 				})
 			end,
 		},
@@ -429,14 +485,6 @@ vim.api.nvim_create_autocmd("VimResized", {
 	group = augroup,
 	callback = function()
 		vim.cmd("tabdo wincmd =")
-	end,
-})
-
--- no auto continue comments on new line
-vim.api.nvim_create_autocmd("FileType", {
-	group = vim.api.nvim_create_augroup("no_auto_comment", {}),
-	callback = function()
-		vim.opt_local.formatoptions:remove({ "c", "r", "o" })
 	end,
 })
 
