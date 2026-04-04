@@ -8,10 +8,14 @@ alias be='bundle exec'
 alias rc='rails c -- --nomultiline'
 alias rs='rails s'
 alias r='rails'
+alias sk="be sidekiq -C ./config/sidekiq_single_host.yml"
 
 # MyCloud SSH
 alias staging='mcdo run --cluster v3-stg-clu --service v3-stg-puma-svc "bundle exec rails c -- --nomultiline"'
 alias prod='mcdo run --cluster v3-prd-clu --service v3-prd-sidekiq-marketplace-svc "bundle exec rails c -- --nomultiline"'
+
+# Claude
+alias claude='claude --allow-dangerously-skip-permissions'
 
 # Git
 alias wip='git add . && git commit -m "wip"'
