@@ -4,10 +4,6 @@
       "rev": "ec9872f7df7f4eb8b319719c1c253eb3ea8877ed",
       "src": "https://github.com/ThePrimeagen/99"
     },
-    "alabaster.nvim": {
-      "rev": "ae0c5f41c70b576f0678319e57fe47b2b288d2fc",
-      "src": "https://github.com/dchinmay2/alabaster.nvim"
-    },
     "blink.cmp": {
       "rev": "d1c0d6a65dc33ff4f3e31bd93f5c0d23bd55ce8a",
       "src": "https://github.com/saghen/blink.cmp"
@@ -37,42 +33,22 @@
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
-    "jellybeans.nvim": {
-      "rev": "f75e0cfba0cdf3b7530301df8375367c29fbd310",
-      "src": "https://github.com/wtfox/jellybeans.nvim"
-    },
     "kanagawa.nvim": {
       "rev": "aef7f5cec0a40dbe7f3304214850c472e2264b10",
       "src": "https://github.com/rebelot/kanagawa.nvim"
     },
-    "lush.nvim": {
-      "rev": "9c60ec2279d62487d942ce095e49006af28eed6e",
-      "src": "https://github.com/rktjmp/lush.nvim"
-    },
-    "markdown-preview.nvim": {
-      "rev": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee",
-      "src": "https://github.com/iamcco/markdown-preview.nvim"
-    },
     "marks.nvim": {
       "rev": "f353e8c08c50f39e99a9ed474172df7eddd89b72",
       "src": "https://github.com/chentoast/marks.nvim"
-    },
-    "nord.nvim": {
-      "rev": "80c1e5321505aeb22b7a9f23eb82f1e193c12470",
-      "src": "https://github.com/shaunsingh/nord.nvim"
-    },
-    "nordic.nvim": {
-      "rev": "4ce6bad95fde832f9bd10b991de846047a144628",
-      "src": "https://github.com/AlexvZyl/nordic.nvim"
     },
     "nvim-autopairs": {
       "rev": "59bce2eef357189c3305e25bc6dd2d138c1683f5",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-treesitter": {
-      "rev": "42fc28ba918343ebfd5565147a42a26580579482",
+      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
-      "version": "'master'"
+      "version": "'main'"
     },
     "nvim-ufo": {
       "rev": "ab3eb124062422d276fae49e0dd63b3ad1062cfc",
@@ -81,10 +57,6 @@
     "oil.nvim": {
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
       "src": "https://github.com/stevearc/oil.nvim"
-    },
-    "oldworld.nvim": {
-      "rev": "db072a0bd2c90035fc3a57a73014cb54d3902f1f",
-      "src": "https://github.com/dgox16/oldworld.nvim"
     },
     "plenary.nvim": {
       "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
@@ -97,10 +69,6 @@
     "quicker.nvim": {
       "rev": "063cc44da1eef8681bbd653b29d3bc961780886a",
       "src": "https://github.com/stevearc/quicker.nvim"
-    },
-    "render-markdown.nvim": {
-      "rev": "e3c18ddd27a853f85a6f513a864cf4f2982b9f26",
-      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "ruby-fqcn.nvim": {
       "rev": "4b354a4e33c86670ee9418a54e36241b5bafc0bd",
@@ -133,10 +101,6 @@
     "vim-tmux-navigator": {
       "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
       "src": "https://github.com/christoomey/vim-tmux-navigator"
-    },
-    "zenbones.nvim": {
-      "rev": "22b7fb75593412e0dc81b4bdefae718e9e84aa82",
-      "src": "https://github.com/zenbones-theme/zenbones.nvim"
     }
   }
 }

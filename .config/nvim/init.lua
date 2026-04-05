@@ -94,6 +94,7 @@ local plugins = {
 			end,
 		},
 	},
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{
 		src = "https://github.com/ThePrimeagen/harpoon",
 		version = "harpoon2",
@@ -134,8 +135,12 @@ local plugins = {
 					FzfLua.live_grep({ hidden = true, silent = true, rg_opts = "--hidden --glob '!.opencode' --glob '!*.sql'" })
 				end)
 				vim.keymap.set("n", "<leader>R", function()
-					FzfLua.live_grep({ hidden = true, silent = true, rg_opts =
-					"--hidden --glob '!.opencode' --glob '!*.sql' --glob '!*_spec.rb'" })
+					FzfLua.live_grep({
+						hidden = true,
+						silent = true,
+						rg_opts =
+						"--hidden --glob '!.opencode' --glob '!*.sql' --glob '!*_spec.rb'"
+					})
 				end)
 
 				require("fzf-lua").setup({
@@ -161,6 +166,7 @@ local plugins = {
 			end,
 		},
 	},
+	{ src = "https://github.com/kevinhwang91/promise-async" },
 	{
 		src = "https://github.com/kevinhwang91/nvim-ufo",
 		data = {
@@ -173,7 +179,6 @@ local plugins = {
 			end,
 		},
 	},
-	{ src = "https://github.com/kevinhwang91/promise-async" },
 	{
 		src = "https://github.com/lewis6991/gitsigns.nvim",
 		data = {
@@ -200,21 +205,7 @@ local plugins = {
 		},
 	},
 	{ src = "https://github.com/ntpeters/vim-better-whitespace" },
-	{ src = "https://github.com/nvim-lua/plenary.nvim" },
-	{
-		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		version = "master",
-		data = {
-			setup = function()
-				require("nvim-treesitter.configs").setup({
-					ensure_installed = { "lua", "ruby" },
-					highlight = { enable = true },
-					indent = { enable = true },
-					endwise = { enable = true },
-				})
-			end,
-		},
-	},
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{
 		src = "https://github.com/qpkorr/vim-bufkill",
 		data = {
